@@ -1,0 +1,63 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+</script>
+
+<script>
+    function work(){
+        if($("#type").val() == "multiple choice"){
+                
+                $("#choice1-label").show();
+                $("#choice2-label").show();
+                $("#choice3-label").show();
+                $("#choice4-label").show();
+                $("#choice5-label").show();;
+                $(".choices").show();
+            }
+            
+            if($("#type").val() == "written"){
+                $("#choice1-label").hide();
+                $("#choice2-label").hide();
+                $("#choice3-label").hide();
+                $("#choice4-label").hide();
+                $("#choice5-label").hide();;
+                $(".choices").hide();
+            }
+    }
+    $(document ).ready(function() {
+        work();
+        $("#type").change(function(){
+            work();
+        });
+    });
+         
+</script> 
+<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Anasayfa</a> <span class="divider">/</span>
+					</li>
+					<li>
+						<a href="#">Soru Düzenleme</a>
+					</li>
+                                </ul>
+				
+</div>
+
+<div class="row-fluid sortable">
+            <div class="box span12">
+                    <div class="box-header well" data-original-title>
+                            <h2><i class="icon-edit"></i>Soru Düzenle</h2>
+                              <div class="box-icon">
+                                    <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+                                    <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                                    <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                            </div>
+                    </div>
+                <div class="box-content">
+                              <fieldset>
+                                    <?php echo $this->form;?>
+                              </fieldset>
+
+                    </div>
+            </div><!--/span-->
+
+</div><!--/row-->

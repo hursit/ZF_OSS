@@ -1,0 +1,938 @@
+<?xml version="1.0"?>
+<projectProfile type="default" version="1.11.11">
+  <projectDirectory>
+    <projectProfileFile filesystemName=".zfproject.xml"/>
+    <applicationDirectory classNamePrefix="Application_">
+      <apisDirectory enabled="false"/>
+      <configsDirectory>
+        <applicationConfigFile type="ini"/>
+      </configsDirectory>
+      <controllersDirectory>
+        <controllerFile controllerName="Index">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Error"/>
+        <controllerFile controllerName="Student">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="waitingstudent"/>
+        </controllerFile>
+        <controllerFile controllerName="1">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+      </controllersDirectory>
+      <formsDirectory>
+        <formFile formName="Exam"/>
+      </formsDirectory>
+      <layoutsDirectory>
+        <layoutScriptsDirectory>
+          <layoutScriptFile layoutName="layout"/>
+        </layoutScriptsDirectory>
+      </layoutsDirectory>
+      <modelsDirectory>
+        <dbTableDirectory>
+          <dbTableFile dbTableName="Announcement"/>
+          <dbTableFile dbTableName="Department"/>
+          <dbTableFile dbTableName="Members"/>
+          <dbTableFile dbTableName="Class"/>
+          <dbTableFile dbTableName="Lesson"/>
+          <dbTableFile dbTableName="Homework"/>
+          <dbTableFile dbTableName="LessonStudent"/>
+          <dbTableFile dbTableName="Exam"/>
+          <dbTableFile dbTableName="Questions"/>
+          <dbTableFile dbTableName="Choices"/>
+          <dbTableFile dbTableName="WrittenAnswers"/>
+          <dbTableFile dbTableName="ChoiceAnswers"/>
+          <dbTableFile dbTableName="StudentExam"/>
+          <dbTableFile dbTableName="StudentHomeworks"/>
+        </dbTableDirectory>
+        <modelFile modelName="Datetime"/>
+        <modelFile modelName="File"/>
+      </modelsDirectory>
+      <modulesDirectory>
+        <moduleDirectory moduleName="default">
+          <apisDirectory enabled="false"/>
+          <configsDirectory enabled="false"/>
+          <controllersDirectory>
+            <controllerFile controllerName="Index">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="about"/>
+              <actionMethod actionName="contact"/>
+              <actionMethod actionName="teacherlogin"/>
+              <actionMethod actionName="login"/>
+              <actionMethod actionName="teachersignup"/>
+              <actionMethod actionName="studentsignup"/>
+              <actionMethod actionName="switchLanguage"/>
+            </controllerFile>
+            <controllerFile controllerName="Student">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="signup"/>
+              <actionMethod actionName="login"/>
+            </controllerFile>
+            <controllerFile controllerName="Teacher">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="login"/>
+              <actionMethod actionName="signup"/>
+            </controllerFile>
+            <controllerFile controllerName="Error">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+          </controllersDirectory>
+          <formsDirectory>
+            <formFile formName="Login"/>
+            <formFile formName="StudentSignup"/>
+            <formFile formName="TeacherSignup"/>
+            <formFile formName="Login"/>
+            <formFile formName="StudentSignUp"/>
+            <formFile formName="TeacherSignup"/>
+          </formsDirectory>
+          <layoutsDirectory enabled="false"/>
+          <modelsDirectory>
+            <modelFile modelName="Student"/>
+            <modelFile modelName="Teacher"/>
+            <dbTableDirectory>
+              <dbTableFile dbTableName="Teachers"/>
+              <dbTableFile dbTableName="Students"/>
+              <dbTableFile dbTableName="Members"/>
+            </dbTableDirectory>
+            <modelFile modelName="Member"/>
+          </modelsDirectory>
+          <viewsDirectory>
+            <viewScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="about"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="contact"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="teacherlogin"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Teacher">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="signup"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="login"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="login"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="teachersignup"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="studentsignup"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Error">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="switchLanguage"/>
+              </viewControllerScriptsDirectory>
+            </viewScriptsDirectory>
+            <viewHelpersDirectory/>
+            <viewFiltersDirectory/>
+          </viewsDirectory>
+        </moduleDirectory>
+        <moduleDirectory moduleName="admin">
+          <apisDirectory enabled="false"/>
+          <configsDirectory enabled="false"/>
+          <controllersDirectory>
+            <controllerFile controllerName="Index">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="adddepartment"/>
+              <actionMethod actionName="logout"/>
+              <actionMethod actionName="sitemap"/>
+              <actionMethod actionName="backupdb"/>
+            </controllerFile>
+            <controllerFile controllerName="Department">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="adddepartment"/>
+              <actionMethod actionName="showdepartment"/>
+              <actionMethod actionName="edit"/>
+              <actionMethod actionName="unPublish"/>
+              <actionMethod actionName="publish"/>
+            </controllerFile>
+            <controllerFile controllerName="Class">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="addclass"/>
+              <actionMethod actionName="edit"/>
+              <actionMethod actionName="publish"/>
+              <actionMethod actionName="unPublish"/>
+              <actionMethod actionName="show"/>
+            </controllerFile>
+            <controllerFile controllerName="Teacher">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="edit"/>
+              <actionMethod actionName="publish"/>
+              <actionMethod actionName="unPublish"/>
+              <actionMethod actionName="show"/>
+            </controllerFile>
+            <controllerFile controllerName="Message">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Exam">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="edit"/>
+              <actionMethod actionName="exam"/>
+            </controllerFile>
+            <controllerFile controllerName="Lesson">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="add"/>
+              <actionMethod actionName="edit"/>
+              <actionMethod actionName="unPublish"/>
+              <actionMethod actionName="publish"/>
+              <actionMethod actionName="lessonStudents"/>
+            </controllerFile>
+            <controllerFile controllerName="Student">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="edit"/>
+              <actionMethod actionName="show"/>
+              <actionMethod actionName="unPublish"/>
+              <actionMethod actionName="publish"/>
+              <actionMethod actionName="departmentClass"/>
+              <actionMethod actionName="departmentList"/>
+              <actionMethod actionName="departmentClassPdfList"/>
+            </controllerFile>
+            <controllerFile controllerName="Announcement">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="getJson"/>
+              <actionMethod actionName="edit"/>
+              <actionMethod actionName="show"/>
+            </controllerFile>
+          </controllersDirectory>
+          <formsDirectory>
+            <formFile formName="Login"/>
+            <formFile formName="Adddepartment"/>
+            <formFile formName="Addclass"/>
+            <formFile formName="Addlesson"/>
+          </formsDirectory>
+          <layoutsDirectory enabled="false"/>
+          <modelsDirectory>
+            <dbTableDirectory>
+              <dbTableFile dbTableName="Announcement"/>
+            </dbTableDirectory>
+          </modelsDirectory>
+          <viewsDirectory>
+            <viewScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Department">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Class">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Teacher">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Message">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exam">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="adddepartment"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Department">
+                <viewScriptFile forActionName="adddepartment"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Class">
+                <viewScriptFile forActionName="addclass"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="logout"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="sitemap"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Department">
+                <viewScriptFile forActionName="showdepartment"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="add"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="backupdb"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Department">
+                <viewScriptFile forActionName="edit"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exam">
+                <viewScriptFile forActionName="edit"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="edit"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="edit"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Teacher">
+                <viewScriptFile forActionName="edit"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Department">
+                <viewScriptFile forActionName="unPublish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Department">
+                <viewScriptFile forActionName="publish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Class">
+                <viewScriptFile forActionName="edit"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Class">
+                <viewScriptFile forActionName="publish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Class">
+                <viewScriptFile forActionName="unPublish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Teacher">
+                <viewScriptFile forActionName="publish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Teacher">
+                <viewScriptFile forActionName="unPublish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Teacher">
+                <viewScriptFile forActionName="show"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="show"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="unPublish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="publish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="unPublish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="publish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Announcement">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Announcement">
+                <viewScriptFile forActionName="show"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Class">
+                <viewScriptFile forActionName="show"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="departmentClass"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="departmentList"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="departmentClassPdfList"/>
+              </viewControllerScriptsDirectory>
+            </viewScriptsDirectory>
+            <viewHelpersDirectory/>
+            <viewFiltersDirectory/>
+          </viewsDirectory>
+        </moduleDirectory>
+        <moduleDirectory moduleName="student">
+          <apisDirectory enabled="false"/>
+          <configsDirectory enabled="false"/>
+          <controllersDirectory>
+            <controllerFile controllerName="Index">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="logout"/>
+            </controllerFile>
+            <controllerFile controllerName="Announcement">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="show"/>
+            </controllerFile>
+            <controllerFile controllerName="Lesson">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="departmentLessons"/>
+              <actionMethod actionName="addLessonApplication"/>
+              <actionMethod actionName="deleteLessonApplication"/>
+            </controllerFile>
+            <controllerFile controllerName="Homework">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="show"/>
+              <actionMethod actionName="lessonHomeworks"/>
+            </controllerFile>
+            <controllerFile controllerName="Exam">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="show"/>
+              <actionMethod actionName="lessonExams"/>
+              <actionMethod actionName="exam"/>
+              <actionMethod actionName="examSave"/>
+            </controllerFile>
+          </controllersDirectory>
+          <formsDirectory>
+            <formFile formName="Login"/>
+            <formFile formName="Signup"/>
+            <formFile formName="Homework"/>
+          </formsDirectory>
+          <layoutsDirectory enabled="false"/>
+          <modelsDirectory>
+            <dbTableDirectory>
+              <dbTableFile dbTableName="Students"/>
+              <dbTableFile dbTableName="Announcement"/>
+            </dbTableDirectory>
+          </modelsDirectory>
+          <viewsDirectory>
+            <viewScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="logout"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Announcement">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Homework">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exam">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Homework">
+                <viewScriptFile forActionName="show"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exam">
+                <viewScriptFile forActionName="show"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Homework">
+                <viewScriptFile forActionName="lessonHomeworks"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exam">
+                <viewScriptFile forActionName="lessonExams"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="departmentLessons"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="addLessonApplication"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="deleteLessonApplication"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Announcement">
+                <viewScriptFile forActionName="show"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exam">
+                <viewScriptFile forActionName="exam"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exam">
+                <viewScriptFile forActionName="examSave"/>
+              </viewControllerScriptsDirectory>
+            </viewScriptsDirectory>
+            <viewHelpersDirectory/>
+            <viewFiltersDirectory/>
+          </viewsDirectory>
+        </moduleDirectory>
+        <moduleDirectory moduleName="teacher">
+          <apisDirectory enabled="false"/>
+          <configsDirectory enabled="false"/>
+          <controllersDirectory>
+            <controllerFile controllerName="Index">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="logout"/>
+            </controllerFile>
+            <controllerFile controllerName="Announcement">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="getJson"/>
+              <actionMethod actionName="show"/>
+              <actionMethod actionName="edit"/>
+              <actionMethod actionName="pdfDownload"/>
+            </controllerFile>
+            <controllerFile controllerName="Exam">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="exams"/>
+            </controllerFile>
+            <controllerFile controllerName="Homework">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="lessonHomeworks"/>
+              <actionMethod actionName="edit"/>
+              <actionMethod actionName="show"/>
+              <actionMethod actionName="pdfDownload"/>
+            </controllerFile>
+            <controllerFile controllerName="Student">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="waitingstudents"/>
+              <actionMethod actionName="students"/>
+              <actionMethod actionName="waitingLessonStudents"/>
+              <actionMethod actionName="cormirmedLessonStudent"/>
+              <actionMethod actionName="show"/>
+            </controllerFile>
+            <controllerFile controllerName="Lesson">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="lessonStudents"/>
+              <actionMethod actionName="unPublish"/>
+              <actionMethod actionName="publish"/>
+              <actionMethod actionName="confirmedStudentLessonApplication"/>
+              <actionMethod actionName="deleteStudentLessonApplication"/>
+              <actionMethod actionName="studentList"/>
+            </controllerFile>
+            <controllerFile controllerName="FutureExams">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="HistoryExams">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="LessonApplication">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Exams">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="lessonExams"/>
+              <actionMethod actionName="futureExams"/>
+              <actionMethod actionName="historyExams"/>
+              <actionMethod actionName="show"/>
+              <actionMethod actionName="edit"/>
+              <actionMethod actionName="questions"/>
+              <actionMethod actionName="editQuestion"/>
+              <actionMethod actionName="deleteQuestion"/>
+              <actionMethod actionName="pdfDownload"/>
+            </controllerFile>
+          </controllersDirectory>
+          <formsDirectory>
+            <formFile formName="Login"/>
+            <formFile formName="Signup"/>
+            <formFile formName="Addannouncement"/>
+            <formFile formName="Addhomework"/>
+            <formFile formName="Exam"/>
+            <formFile formName="Question"/>
+          </formsDirectory>
+          <layoutsDirectory enabled="false"/>
+          <modelsDirectory>
+            <dbTableDirectory>
+              <dbTableFile dbTableName="Teachers"/>
+              <dbTableFile dbTableName="Announcement"/>
+            </dbTableDirectory>
+          </modelsDirectory>
+          <viewsDirectory>
+            <viewScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Announcement">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exam">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Homework">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="waitingstudents"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="students"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exam">
+                <viewScriptFile forActionName="exams"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="logout"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="FutureExams">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="HistoryExams">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="LessonApplication">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="lessonStudents"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Homework">
+                <viewScriptFile forActionName="lessonHomeworks"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exams">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exams">
+                <viewScriptFile forActionName="lessonExams"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exams">
+                <viewScriptFile forActionName="futureExams"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exams">
+                <viewScriptFile forActionName="historyExams"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="waitingLessonStudents"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="cormirmedLessonStudent"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exams">
+                <viewScriptFile forActionName="show"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exams">
+                <viewScriptFile forActionName="edit"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Homework">
+                <viewScriptFile forActionName="edit"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Homework">
+                <viewScriptFile forActionName="show"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="unPublish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="publish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="confirmedStudentLessonApplication"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="deleteStudentLessonApplication"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="show"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Announcement">
+                <viewScriptFile forActionName="getJson"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Announcement">
+                <viewScriptFile forActionName="show"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Announcement">
+                <viewScriptFile forActionName="edit"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exams">
+                <viewScriptFile forActionName="questions"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exams">
+                <viewScriptFile forActionName="editQuestion"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exams">
+                <viewScriptFile forActionName="deleteQuestion"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exams">
+                <viewScriptFile forActionName="pdfDownload"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Homework">
+                <viewScriptFile forActionName="pdfDownload"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Announcement">
+                <viewScriptFile forActionName="pdfDownload"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="studentList"/>
+              </viewControllerScriptsDirectory>
+            </viewScriptsDirectory>
+            <viewHelpersDirectory/>
+            <viewFiltersDirectory/>
+          </viewsDirectory>
+        </moduleDirectory>
+        <moduleDirectory moduleName="departmentAdvisor">
+          <apisDirectory enabled="false"/>
+          <configsDirectory enabled="false"/>
+          <controllersDirectory>
+            <controllerFile controllerName="Index">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Lesson">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Student">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+          </controllersDirectory>
+          <formsDirectory enabled="false"/>
+          <layoutsDirectory enabled="false">
+            <layoutScriptsDirectory enabled="false"/>
+          </layoutsDirectory>
+          <modelsDirectory>
+            <dbTableDirectory enabled="false"/>
+          </modelsDirectory>
+          <viewsDirectory>
+            <viewScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+            </viewScriptsDirectory>
+            <viewHelpersDirectory/>
+            <viewFiltersDirectory/>
+          </viewsDirectory>
+        </moduleDirectory>
+        <moduleDirectory moduleName="Advisor">
+          <apisDirectory enabled="false"/>
+          <configsDirectory enabled="false"/>
+          <controllersDirectory/>
+          <formsDirectory enabled="false"/>
+          <layoutsDirectory enabled="false">
+            <layoutScriptsDirectory enabled="false"/>
+          </layoutsDirectory>
+          <modelsDirectory>
+            <dbTableDirectory enabled="false"/>
+          </modelsDirectory>
+          <viewsDirectory>
+            <viewScriptsDirectory/>
+            <viewHelpersDirectory/>
+            <viewFiltersDirectory/>
+          </viewsDirectory>
+        </moduleDirectory>
+        <moduleDirectory moduleName="advisor">
+          <apisDirectory enabled="false"/>
+          <configsDirectory enabled="false"/>
+          <controllersDirectory>
+            <controllerFile controllerName="Student">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="cormirmedLessonStudent"/>
+              <actionMethod actionName="cormirmedStudentLesson"/>
+              <actionMethod actionName="show"/>
+            </controllerFile>
+            <controllerFile controllerName="Lesson">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="publish"/>
+              <actionMethod actionName="unPublish"/>
+              <actionMethod actionName="cormirmedStudentLesson"/>
+              <actionMethod actionName="deleteStudentLessonApplication"/>
+            </controllerFile>
+            <controllerFile controllerName="Index">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="logout"/>
+            </controllerFile>
+            <controllerFile controllerName="DepartmentLessons">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="add"/>
+              <actionMethod actionName="edit"/>
+              <actionMethod actionName="publish"/>
+              <actionMethod actionName="unPublish"/>
+            </controllerFile>
+            <controllerFile controllerName="DepartmentStudents">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="waitingStudents"/>
+              <actionMethod actionName="cormirmedStudent"/>
+              <actionMethod actionName="deleteStudent"/>
+            </controllerFile>
+            <controllerFile controllerName="Announcement">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Exams">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="edit"/>
+              <actionMethod actionName="show"/>
+            </controllerFile>
+            <controllerFile controllerName="Homework">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="show"/>
+              <actionMethod actionName="edit"/>
+            </controllerFile>
+            <controllerFile controllerName="DepartmentExams">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+          </controllersDirectory>
+          <formsDirectory>
+            <formFile formName="Exam"/>
+            <formFile formName="Announcement"/>
+          </formsDirectory>
+          <layoutsDirectory enabled="false">
+            <layoutScriptsDirectory enabled="false"/>
+          </layoutsDirectory>
+          <modelsDirectory>
+            <dbTableDirectory enabled="false"/>
+          </modelsDirectory>
+          <viewsDirectory>
+            <viewScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="DepartmentLessons">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="DepartmentStudents">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Announcement">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exams">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Homework">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="DepartmentLessons">
+                <viewScriptFile forActionName="add"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="DepartmentLessons">
+                <viewScriptFile forActionName="edit"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="DepartmentLessons">
+                <viewScriptFile forActionName="publish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="DepartmentLessons">
+                <viewScriptFile forActionName="unPublish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="DepartmentStudents">
+                <viewScriptFile forActionName="waitingStudents"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="logout"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="DepartmentExams">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="cormirmedLessonStudent"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="DepartmentStudents">
+                <viewScriptFile forActionName="cormirmedStudent"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="DepartmentStudents">
+                <viewScriptFile forActionName="deleteStudent"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="publish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="unPublish"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="cormirmedStudentLesson"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="cormirmedStudentLesson"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Lesson">
+                <viewScriptFile forActionName="deleteStudentLessonApplication"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exams">
+                <viewScriptFile forActionName="edit"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Exams">
+                <viewScriptFile forActionName="show"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Homework">
+                <viewScriptFile forActionName="show"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Homework">
+                <viewScriptFile forActionName="edit"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Student">
+                <viewScriptFile forActionName="show"/>
+              </viewControllerScriptsDirectory>
+            </viewScriptsDirectory>
+            <viewHelpersDirectory/>
+            <viewFiltersDirectory/>
+          </viewsDirectory>
+        </moduleDirectory>
+      </modulesDirectory>
+      <viewsDirectory>
+        <viewScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Error">
+            <viewScriptFile forActionName="error"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Teacher">
+            <viewScriptFile forActionName="login"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Teacher">
+            <viewScriptFile forActionName="signup"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Student">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Student">
+            <viewScriptFile forActionName="waitingstudent"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="1">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Lesson">
+            <viewScriptFile forActionName="lessonStudents"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Announcement">
+            <viewScriptFile forActionName="getJson"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Announcement">
+            <viewScriptFile forActionName="edit"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Exam">
+            <viewScriptFile forActionName="exam"/>
+          </viewControllerScriptsDirectory>
+        </viewScriptsDirectory>
+        <viewHelpersDirectory/>
+        <viewFiltersDirectory enabled="false"/>
+      </viewsDirectory>
+      <bootstrapFile filesystemName="Bootstrap.php"/>
+    </applicationDirectory>
+    <dataDirectory enabled="false">
+      <cacheDirectory enabled="false"/>
+      <searchIndexesDirectory enabled="false"/>
+      <localesDirectory enabled="false"/>
+      <logsDirectory enabled="false"/>
+      <sessionsDirectory enabled="false"/>
+      <uploadsDirectory enabled="false"/>
+    </dataDirectory>
+    <docsDirectory>
+      <file filesystemName="README.txt"/>
+    </docsDirectory>
+    <libraryDirectory>
+      <zfStandardLibraryDirectory enabled="false"/>
+    </libraryDirectory>
+    <publicDirectory>
+      <publicStylesheetsDirectory enabled="false"/>
+      <publicScriptsDirectory enabled="false"/>
+      <publicImagesDirectory enabled="false"/>
+      <publicIndexFile filesystemName="index.php"/>
+      <htaccessFile filesystemName=".htaccess"/>
+    </publicDirectory>
+    <projectProvidersDirectory enabled="false"/>
+    <temporaryDirectory enabled="false"/>
+    <testsDirectory>
+      <testPHPUnitConfigFile filesystemName="phpunit.xml"/>
+      <testPHPUnitBootstrapFile filesystemName="bootstrap.php"/>
+      <testApplicationDirectory>
+        <testApplicationControllerDirectory>
+          <testApplicationControllerFile forControllerName="Index"/>
+        </testApplicationControllerDirectory>
+      </testApplicationDirectory>
+      <testLibraryDirectory/>
+    </testsDirectory>
+  </projectDirectory>
+</projectProfile>

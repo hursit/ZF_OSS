@@ -1,0 +1,61 @@
+<!--- datepicker css   -->
+<link rel="stylesheet" type="text/css" media="screen" href="/datetimepicker/bootstrap-datetimepicker.min.css">
+
+<form action="/teacher/exams/lesson-exams/<?php echo $this->lesson->id;?>" method="post">
+    <!-- teacher department end lesson information -->
+    <input type="hidden" name="teacher_id" value="<?php echo $this->user->id ?>">
+    <input type="hidden" name="lesson_id" value="<?php echo $this->lesson->id ?>">
+    <input type="hidden" name="department_id" value="<?php echo $this->lesson->department_id ;?>">
+    <input type="hidden" name="class_id" value="<?php echo $this->lesson->class_id ?>">
+    <fieldset>
+        <label for="title">Başlık</label>
+        <input type="text" name="title" id="title" placeHolder="Başlığı giriniz" required>
+    </fieldset>
+    
+    <fieldset>
+        <label for="start_time">Sınav Başlangıcı</label>
+        <div class="datetimepicker" class="input-append date">
+            <input type="text" name="start_time"></input>
+            <span class="add-on">
+              <i data-time-icon="icon-time" data-date-icon="icon-calendar" required></i>
+            </span>
+        </div>
+    </fieldset>
+    <fieldset>
+        <label for="start_time">Sınav Bitişi</label>
+        <div class="datetimepicker" class="input-append date">
+            <input type="text" name="finish_time"></input>
+            <span class="add-on">
+              <i data-time-icon="icon-time" data-date-icon="icon-calendar" required></i>
+            </span>
+        </div>
+    </fieldset>
+    <fieldset>
+        <label for="detail">Detay</label>
+        <textarea name="detail" id="detail" class="cleditor" placeHolder="Detayı giriniz" required></textarea>
+    </fieldset>
+   
+    <fieldset>
+        <label for="type">Sınav Türü</label>
+        <select name="type" id="type" required>
+            <option value="school">Okul</option>
+            <option value="online">Online</option>
+        </select>
+    </fieldset>
+    
+    <input type="submit" class="btn btn-primary" value="kaydet">
+</form>
+
+<script type="text/javascript"
+     src="/datetimepicker/jquery.min.js">
+</script> 
+<script type="text/javascript"
+ src="/datetimepicker/bootstrap-datetimepicker.min.js">
+</script>
+<script type="text/javascript">
+  $('.datetimepicker').datetimepicker({
+    format: 'yyyy/MM/dd hh:mm:ss',
+    language: 'tr'
+  });
+</script>
+

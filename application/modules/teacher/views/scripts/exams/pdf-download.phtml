@@ -1,0 +1,39 @@
+<html>
+    <head>
+        
+    </head>
+    <style>
+        body { 
+            background: url('/img/pdf_background.jpg');
+            background-repeat:no-repeat;
+            background-attachment:fixed;
+            background-position:center; 
+        }
+    </style>
+    <body>
+    
+    
+    <h1 style='text-align: center'><?php echo $this->exam->title."<br>"; ?></h1>
+<span style="font-weight:bold;font-size:16px">Detaylar: </span><?php echo $this->exam->detail."<br>"; ?>
+<br><br>
+<center><h2>Sorular</h2></center>
+
+            <?php if(count($this->questions)){
+                $i = 1;
+                $choicesModel = new Application_Model_DbTable_Choices();
+                foreach ($this->questions as $question) { ?>
+                   <div style="font-weight:bold;font-size:14px;color:brown"><?php echo $i."-) ".$question->question; ?></div><br>
+                        <?php if($question->type = "multiple choice"){
+                            echo "<ul style='list-style-type:lower-alpha'>";
+                            foreach ($choicesModel->getAll(array("question_id" => $question->id)) as $choice) {
+                                echo "<li style='font-weight:bold;font-size:14'>".$choice->choice."</li><br>";
+                            } 
+                            echo "</ul>";
+                        }?>
+             <?php
+                $i+=1; 
+                    }
+                }; 
+            ?>
+    </body>
+</html>

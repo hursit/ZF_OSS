@@ -1,0 +1,4 @@
+header('Content-Type: application/zip');
+header('Content-disposition: attachment; filename=<?php echo $this->filename;?>');
+header('Content-Length: ' . filesize(zipArchive.zip));
+readfile(<?php echo APPLICATION_PATH."/../public/zipArchive.zip";?>

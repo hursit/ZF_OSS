@@ -1,0 +1,60 @@
+<div class="row-fluid sortable">		
+        <div class="box span12">
+                <div class="box-header well" data-original-title>
+                        <h2>Son Duyurular</h2>
+                        <div class="box-icon">
+                                <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+                                <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                                <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                        </div>
+                </div>
+                <div class="box-content">
+                        <table class="table table-striped">
+                                  <thead>
+                                          <tr>
+                                                  <th>Gönderen</th>
+                                                  <th>Başlık</th>
+                                                  <th>Gönderilme Zamanı</th>   
+                                                  <th>Gönderilme Yeri</th>                                     
+                                                  <th></th>                                          
+                                          </tr>
+                                  </thead>   
+                                  <tbody>
+            <?php
+            $memberModel = new Application_Model_DbTable_Members();
+            $lessonModel = new Application_Model_DbTable_Lesson();
+            $departmentModel = new Application_Model_DbTable_Department();
+            $classModel = new Application_Model_DbTable_Class();
+            
+            
+            if(isset($this->announcements)){
+            
+            foreach ($this->announcements as $announcement) {
+                    $teacher = $memberModel->getByFilter(array('id' => $announcement->teacher_id));
+                    $sendPlace = null;
+                    if($announcement->lesson_id){
+                        $sendPlace = $departmentModel->getByFilter(array('id'=> $announcement->department_id ))->name;
+                        $sendPlace .= " - ". $classModel->getByFilter(array('id'=> $announcement->class_id ))->name;
+                        $sendPlace .= " - ". $lessonModel->getByFilter(array('id'=> $announcement->lesson_id ))->name;
+                    }elseif ($announcement->class_id) {
+                        $sendPlace = $departmentModel->getByFilter(array('id'=> $announcement->department_id ))->name;
+                        $sendPlace .= " - ". $classModel->getByFilter(array('id'=> $announcement->class_id ))->name;
+                    }elseif ($announcement->department_id) {
+                        $sendPlace = $departmentModel->getByFilter(array('id'=> $announcement->department_id ))->name;
+                    }else{
+                       $sendPlace = "Her Yer"; 
+                    }
+            ?>    
+                                        <tr>
+                                                <td><?php echo ucfirst($teacher->name)." ".strtoupper($teacher->surname);?></td>
+                                                <td class="center"><?php echo $announcement->title;?></td>
+                                                <td class="center"><?php echo $announcement->time;?></td>                                       
+                                                <td class="center"><?php echo $sendPlace;?></td>                                       
+                                                <td><a href="<?php echo $this->baseUrl('/student/announcement/show/'.$announcement->id);?>" class="btn btn-primary">Görüntüle</a></td>
+                                        </tr>
+            <?php }} ?>
+                                  </tbody>
+                         </table>  
+                </div>
+        </div><!--/span-->
+</div><!--/row-->

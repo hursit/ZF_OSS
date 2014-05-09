@@ -1,0 +1,23 @@
+<form action="<?php echo $this->baseUrl('/student/exam/exam-save/'.$this->exam->id) ?>" method="post"><?php
+echo $this->exam->title." Sınavına hoşgeldiniz...<br>";
+echo $this->exam->detail."<br>";
+$i = 1;
+$choicesmodel = new Application_Model_DbTable_Choices();
+foreach ($this->questions as $question) {
+    echo $i."-) ".$question->question."<br>";
+    if($question->type == "written"){
+        echo "<textarea name='".$question->id."-written'></textarea><br>";
+    }
+    else{
+        $choices = $choicesmodel->getAll(array("question_id" => $question->id));
+        echo "<select name='".$question->id."-choice'";
+        foreach($choices as $choice){
+            echo "<option value='".$choice->id."'>".$choice->choice."</option>";     
+        }
+        echo "</select>";
+    }
+    $i += 1;
+    echo "<hr />";
+    } ?>
+    <input type="submit" class="btn btn-primary btn-large" value="Sınavı Bitir">
+</form>

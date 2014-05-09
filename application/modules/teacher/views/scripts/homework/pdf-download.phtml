@@ -1,0 +1,17 @@
+<html>
+    <head>
+        
+    </head>
+    <style>
+        body { 
+            background: url('/img/pdf_background.jpg');
+            background-repeat:no-repeat;
+            background-attachment:fixed;
+            background-position:center; 
+        }
+    </style>
+    <body>
+        <h1 style='text-align: center'><?php echo $this->homework->title."<br>"; ?></h1>
+        <span style="font-weight:bold;font-size:16px">Detaylar: </span><?php echo $this->homework->detail."<br>"; ?>
+    </body>
+</html>

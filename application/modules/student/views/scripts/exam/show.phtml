@@ -1,0 +1,58 @@
+<?php if($this->remaining_seconds){
+?>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    var basla = <?php echo $this->remaining_seconds; ?>;
+    var sayilacak = 0;
+ 
+    function say() {
+    $("#sayac").html( basla );
+    if(basla <= sayilacak) { $("#sayac").html(sayilacak); clearInterval(islem);  window.location.replace("<?php echo $this->baseUrl("/student/exam/exam/".$this->exam->id);?>"); }
+        basla -= 1;
+    }
+    var islem = setInterval(function(){ say(); },1000);
+})
+</script>
+<?php } ?>
+
+<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Anasayfa</a> <span class="divider">/</span>
+					</li>
+					<li>
+						<a href="#">Sınav Detayları</a>
+					</li>
+                                </ul>
+				
+</div>
+ 
+<div class="row-fluid sortable">
+            <div class="box span12">
+                    <div class="box-header well" data-original-title>
+                            <h2><i class="icon-edit"></i>Sınav Detayları</h2>
+                              <div class="box-icon">
+                                    <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+                                    <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                                    <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                            </div>
+                    </div>
+                <div class="box-content">
+                              <fieldset>
+                                  Baslık : <?php echo $this->exam->title; ?> <br>
+                                  Detay : <?php echo $this->exam->detail; ?> <br>
+                                  Başlangıc : <?php echo $this->exam->start_time; ?> <br>
+                                  Bitiş : <?php echo $this->exam->finish_time; ?> <br>
+                                  Girecek Öğrenciler : /// Doldurulacak<br>
+ <?php
+    if($this->remaining_seconds){
+     echo "Sınava <span id='sayac'>".$this->remaining_seconds."</span> Saniye Kaldı.";
+    }
+ ?>
+                              </fieldset>
+
+                    </div>
+            </div><!--/span-->
+
+</div><!--/row-->

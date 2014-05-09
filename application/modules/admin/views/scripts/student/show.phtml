@@ -1,0 +1,61 @@
+<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Anasayfa</a> <span class="divider">/</span>
+					</li>
+					<li>
+                                            <a href="#">Dersi Alan Öğrenciler</a><span class="divider">/</span>
+					</li>
+					<li>
+						<a href="#">Öğrenciler</a>
+					</li>
+				
+</div>
+
+<fieldset>
+    <legend>Öğrenci Bilgileri</legend>
+    <div class="well">
+        İsim : <?php echo ucfirst($this->student->name);?>
+        <br>Soyisim : <?php echo ucfirst($this->student->surname);?>
+        <br>Email : <?php echo $this->student->email;?>
+        <br>Telefon : <?php echo ucfirst($this->student->telephone);?>
+        <br>Bölüm : <?php echo ucfirst($this->student->department_name);?>
+        <br>Sınıf : <?php echo ucfirst($this->student->class_name);?>
+    </div>
+</fieldset>
+<div class="row-fluid sortable">		
+            <div class="box span12">
+                    <div class="box-header well" data-original-title>
+                            <h2><i class="icon-user"></i> Aldığı Dersler</h2>
+                            <div class="box-icon">
+                                    <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                                    <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                            </div>
+                    </div>
+                    <div class="box-content">
+                            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                              <thead>
+                                      <tr>
+                                              <th>Ders</th>
+                                              <th>Sınıf</th>
+                                      </tr>
+                              </thead>   
+                              <tbody>
+    
+<?php if(count($this->studentLessons)){
+            foreach ($this->studentLessons as $lesson) {
+?>
+            <tr>
+                <td><?php echo $lesson->lesson_name;?></td>
+                <td><?php echo $lesson->class_name;?></td>
+<?php                                    
+            }
+       }
+?>
+
+                           </tbody>
+                    </table>            
+                </div>
+        </div><!--/span-->
+
+</div><!--/row-->

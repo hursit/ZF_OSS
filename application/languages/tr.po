@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: sdf\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-01 03:27+0200\n"
+"PO-Revision-Date: 2014-03-01 03:28+0200\n"
+"Last-Translator: hursit <hursit.topal@bil.omu.edu.tr>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate;_;gettext;gettext_noop\n"
+"X-Poedit-Basepath: /var/www/finish\n"
+"X-Poedit-SearchPath-0: application\n"
+
+#: application/modules/default/forms/Login.php:12
+msgid "email"
+msgstr "Email"
+
+#: application/modules/default/forms/Login.php:13
+msgid "Your Email Adress"
+msgstr "Email Adresiniz"
+
+#: application/modules/default/forms/Login.php:18
+msgid "password"
+msgstr "Password"
+
+#: application/modules/default/forms/Login.php:20
+msgid "Your Password"
+msgstr "Sifreniz"
+
+#: application/modules/default/forms/Login.php:23
+msgid "Enter"
+msgstr "Giriş"
+
+#: application/modules/default/views/scripts/index/signup.phtml:4
+msgid "New User Account"
+msgstr "Yeni Üye Kaydı"
+
+#: application/modules/default/views/scripts/index/signup.phtml:6
+msgid "Student"
+msgstr "Öğrenci"
+
+#: application/modules/default/views/scripts/index/signup.phtml:7
+msgid "Teacher"
+msgstr "Öğretim Görevlisi"
+
+#: application/modules/default/views/scripts/index/index.phtml:6
+msgid "Hello"
+msgstr "Hello"
+
+#: application/modules/default/views/scripts/index/index.phtml:7
+msgid "What"
+msgstr "What"
+
+#: application/modules/default/views/scripts/index/index.phtml:8
+msgid "Red"
+msgstr "Red"
+
+#: application/modules/default/layouts/scripts/login.phtml:32
+msgid "welcome to system"
+msgstr "Online Sınav Sistemine Hoşgeldiniz"
+
+#: application/modules/default/layouts/scripts/login.phtml:39
+msgid "please write email and password"
+msgstr "Lütfen Email Adresinizi Ve Şifrenizi Giriniz"
+
+#: application/modules/default/layouts/scripts/layout.phtml:15
+msgid "OSS"
+msgstr "Online Sınav Sistemi"
+
+#: application/modules/default/layouts/scripts/layout.phtml:19
+msgid "Homepage"
+msgstr "Anasayfa"
+
+#: application/modules/default/layouts/scripts/layout.phtml:22
+msgid "About Us"
+msgstr "Hakkımızda"
+
+#: application/modules/default/layouts/scripts/layout.phtml:25
+msgid "Contact Us"
+msgstr "İletişim"
+
+#: application/modules/default/layouts/scripts/layout.phtml:28
+msgid "Sign Up"
+msgstr "Sisteme Kaydol"
+
+#: application/modules/default/layouts/scripts/layout.phtml:31
+msgid "Login"
+msgstr "Sisteme Giriş"
+
+#~ msgid "OMU"
+#~ msgstr "19 Mayıs Üniv"
+
+#~ msgid "Welcome , your last2"
+#~ msgstr "hoşgeldiniz 2"

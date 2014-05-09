@@ -1,0 +1,81 @@
+<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Anasayfa</a> <span class="divider">/</span>
+					</li>
+					<li>
+                                            <a href="#">Diğer Bölüm Dersleri</a><span class="divider">/</span>
+					</li>
+					<li>
+						<a href="#">Dersler</a>
+					</li>
+				
+</div>
+<?php if(count($this->classes)){
+  foreach ($this->classes as $class) { ?>
+  
+        <div class="row-fluid sortable">		
+            <div class="box span12">
+                    <div class="box-header well" data-original-title>
+                            <h2><i class="icon-user"></i><?php echo $class->name;?></h2>
+                            <div class="box-icon">
+                                    <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                                    <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                            </div>
+                    </div>
+                    <div class="box-content">
+                            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                              <thead>
+                                      <tr>
+                                              <th>Adı</th>
+                                              <th>Sınıfı</th>
+                                              <th>Öğretim Görevlisi</th>
+                                              <th></th>
+                                      </tr>
+                              </thead>   
+                              <tbody>
+                            <?php 
+                                $lessonModel = new Application_Model_DbTable_Lesson();
+                                $lessons = $lessonModel->getAll(array('class_id' => $class->id));
+                                if(count($lessons)){
+                                      $memberModel = new Application_Model_DbTable_Members();
+                                      $classModel = new Application_Model_DbTable_Class();
+                                      foreach ($lessons as $lesson) {
+                                            $thisLesson = $lessonModel->getByFilter(array('id' => $lesson->id));
+                                            $teacher = $lesson->teacher_id;
+                                            if($lesson->teacher_id){
+                                                $thisTeacher = $memberModel->getByFilter(array('id'=> $lesson->teacher_id));
+                                                $teacher = $thisTeacher->name." ".$thisTeacher->surname;
+                                            }else{
+                                                $teacher = "Öğretmen henüz atanmadı.";
+                                            }
+                                       ?>
+                                    
+                                    <tr>
+                                            <td><?php echo $thisLesson->name; ?></td>
+                                            <td><?php echo $classModel->getByFilter(array('id' => $thisLesson->class_id))->name ;?></td>
+                                            <td class="center"><?php echo $teacher; ?></td>
+                                            <td class="center">
+                                            <?php if(!in_array($lesson->id, $this->studentLessons)){ ?>
+                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/student/lesson/add-lesson-application/'.$lesson->id);?>">
+                                                            <i class="icon-zoom-in icon-white"></i>  
+                                                            Kaydolmak için başvur                                            
+                                                    </a>
+                                            <?php } else{ ?>
+                                                    <a class="btn btn-danger" href="<?php echo $this->baseUrl('/student/lesson/delete-lesson-application/'.$lesson->id);?>">
+                                                            <i class="icon-zoom-in icon-white"></i>  
+                                                            Kaydı Silmek İçin Başvur                                            
+                                                    </a>
+                                            <?php } ?>
+                                            </td>
+                                    </tr>
+                                  <?php  }};?>
+                              </tbody>
+                      </table>            
+                    </div>
+            </div><!--/span-->
+
+    </div><!--/row-->
+<?php
+    };
+}?>

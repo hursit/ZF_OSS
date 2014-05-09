@@ -1,0 +1,47 @@
+<!--- datepicker css   -->
+<link rel="stylesheet" type="text/css" media="screen" href="/datetimepicker/bootstrap-datetimepicker.min.css">
+
+<form action="/teacher/homework/edit/<?php echo $this->homework->id;?>" method="post">
+    
+    
+    <fieldset>
+        <label for="title">Başlık</label>
+        <input type="text" name="title" value="<?php echo $this->homework->title; ?>" id="title" placeHolder="Başlığı giriniz" required>
+    </fieldset>
+    <fieldset>
+        <label for="finish_time">Bitiş Zamanı</label>
+        <div id="datetimepicker" class="input-append date">
+            <input type="text" name="finish_time" value="<?php echo $this->homework->finish_time; ?>" ></input>
+            <span class="add-on">
+              <i data-time-icon="icon-time" data-date-icon="icon-calendar" required></i>
+            </span>
+        </div>
+    </fieldset>
+    
+    <fieldset>
+        <label for="detail">Detay</label>
+        <textarea name="detail" id="detail" class="cleditor" placeHolder="Detayı giriniz" required><?php echo $this->homework->detail; ?></textarea>
+    </fieldset>
+   
+    <input type="submit" class="btn btn-primary" value="kaydet">
+</form>
+
+<script type="text/javascript"
+     src="/datetimepicker/jquery.min.js">
+</script> 
+<script type="text/javascript"
+ src="/datetimepicker/bootstrap.min.js">
+</script>
+<script type="text/javascript"
+ src="/datetimepicker/bootstrap-datetimepicker.min.js">
+</script>
+<script type="text/javascript"
+ src="/datetimepicker/bootstrap-datetimepicker.tr.js">
+</script>
+<script type="text/javascript">
+  $('#datetimepicker').datetimepicker({
+    format: 'yyyy/MM/dd hh:mm:ss',
+    language: 'tr'
+  });
+</script>
+

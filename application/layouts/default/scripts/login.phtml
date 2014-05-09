@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<?php echo $this->render('_header.phtml');?>
+        <style type="text/css">
+	  body {
+		padding-bottom: 40px;
+	  }
+	  .sidebar-nav {
+		padding: 9px 0;
+	  }
+          .errors li {
+            color:red;
+            }
+	</style>
+	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- The fav icon -->
+	<link rel="shortcut icon" href="<?php echo $this->baseUrl().'/adminpages/img/favicon.ico'?>">
+		
+</head>
+
+<body>
+		<div class="container-fluid">
+		<div style="margin-left:30%" class="row-fluid">
+		
+			<div class="row-fluid">
+				<div class="span12 center login-header">
+					<h2><?php echo $this->translate('welcome to system');?></h2>
+				</div><!--/span-->
+			</div><!--/row-->
+			
+			<div class="row-fluid">
+				<div class="well span5 center login-box">
+					<div class="alert alert-info">
+						<?php echo $this->translate('please write email and password');?>
+					</div>
+					<?php echo $this->form; ?>
+				</div><!--/span-->
+			</div><!--/row-->
+				</div><!--/fluid-row-->
+		
+	</div><!--/.fluid-container-->
+
+	<!-- external javascript
+	================================================== -->
+    	<!-- Placed at the end of the document so the pages load faster -->
+</body>
+</html>

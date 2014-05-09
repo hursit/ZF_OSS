@@ -1,0 +1,55 @@
+<html>
+    <head><?php echo $this->render('_header.phtml').PHP_EOL; ?></head>
+    
+  <body>
+                <!-- Navbar
+    ================================================== -->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container">
+              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="brand" href="<?php echo $this->baseUrl().'/default';?>"><?php echo $this->translate('OSS'); ?></a>
+              <div class="nav-collapse collapse">
+                <ul class="nav">
+                  <li class="active">
+                    <a href="<?php echo $this->baseUrl().'/default';?>"><?php echo $this->translate('Homepage');?></a>
+                  </li>
+                  <li class="">
+                    <a href="<?php echo $this->baseUrl().'/default/index/about';?>"><?php echo $this->translate('About Us');?></a>
+                  </li>
+                  <li class="">
+                    <a href="<?php echo $this->baseUrl().'/default/index/contact';?>"><?php echo $this->translate('Contact Us');?></a>
+                  </li>
+                  <li class="">
+                      <a href="<?php echo $this->baseUrl().'/default/index/signup';?>"><?php echo $this->translate('Sign Up');?></a>
+                  </li>
+                  <li class="">
+                      <a href="<?php echo $this->baseUrl().'/default/index/login';?>"><?php echo $this->translate('Login');?></a>
+                  </li>
+             </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="<?php echo $this->baseUrl().'/default/index/switch-language/en';?>"><img src='<?php echo $this->baseUrl('/img/en.png');?>'></a>
+                    </li>
+                     <li>
+                         <a href="<?php echo $this->baseUrl().'/default/index/switch-language/tr';?>"><img src='<?php echo $this->baseUrl('/img/tr.png');?>'></a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+          </div>
+        </div>
+                <br><br><br>
+    <div class="jumbotron masthead">
+      <div class="container">
+        <?php echo $this->layout()->content.PHP_EOL; ?>
+        <?php echo $this->render('_footer.phtml').PHP_EOL   ; ?>
+        
+      </div>
+    </div>  
+    </body>
+</html>
