@@ -73,6 +73,7 @@
                             <table class="table">
                                       <thead>
                                               <tr>
+                                                      <th>Bitiş</th>
                                                       <th>Ders</th>
                                                       <th>Sınıf</th>
                                                       <th>Ödev</th>
@@ -83,16 +84,15 @@
                                    //exam görüntülemede de kullanıyoruz aşağıda.
                                    $dateModel = new Application_Model_Datetime();
                                    if(count($this->homeworks)){
-                                   
-                                 
                                     foreach($this->homeworks as $homework){
                                  
                                  ?>
                                             <tr>
-                                                <td><?php echo $lessonModel->getByFilter(array('id' => $homework->lesson_id))->name;?></td>
-                                                    <td class="center"><?php echo $classModel->getByFilter(array('id' => $homework->class_id))->name;?></td>
-                                                    <td class="center"><?php echo $homework->title;?></td>
-                                                    <td class="center"><?php echo $dateModel->remainingTime($homework->finish_time);?></td>
+                                                <td class="center"><?php echo $homework->hw_finish_time;?></td>
+                                                <td><?php echo $homework->lesson_name;?></td>
+                                                <td><?php echo $homework->class_name;?></td>
+                                                <td><?php echo $homework->hw_title;?></td>
+                                                <td class="center"><?php echo $dateModel->remainingTime($homework->hw_finish_time);?></td>
                                             </tr> 
                                <?php
                                         }
@@ -115,25 +115,30 @@
                             <table class="table table-striped">
                                       <thead>
                                               <tr>
+                                                      <th>Başlangıç</th>
+                                                      <th>Bitiş</th>
                                                       <th>Ders</th>
                                                       <th>Sınıf</th>
+                                                      <th>Ödev</th>
                                                       <th>Kalan Süre</th>                                            
                                               </tr>
                                       </thead>   
                                       <tbody>
-                                 <?php if(count($this->exams)){
+                                 <?php
+                                  if(count($this->exams)){
                                      foreach($this->exams as $exam){
-                                            if($dateModel->is_accessible($exam->start_time)){
                                  ?>
                                             <tr>
-                                                    <td><?php echo $lessonModel->getByFilter(array('id' => $exam->lesson_id))->name;?></td>
-                                                    <td class="center"><?php echo $classModel->getByFilter(array('id' => $exam->class_id))->name;?></td>
-                                                    <td class="center"><?php echo $dateModel->remainingTime($exam->start_time);?></td>
+                                                    <td><?php echo $exam->exam_start_time?></td>
+                                                    <td><?php echo $exam->exam_finish_time?></td>
+                                                    <td><?php echo $exam->lesson_name?></td>
+                                                    <td><?php echo $exam->class_name?></td>
+                                                    <td><?php echo $exam->exam_title?></td>
+                                                    <td><?php echo $dateModel->remainingTime($exam->exam_start_time)?></td>
                                             </tr> 
                                <?php
                                             }
                                         }
-                                    }
                                ?>
                                       </tbody>
                              </table>  

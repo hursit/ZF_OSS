@@ -24,7 +24,7 @@ class Student_HomeworkController extends Zend_Controller_Action
     public function showAction()
     {
         $homework_id = $this->_getParam('id');
-        $homework = $this->_homeworkModel->getByFilter(array('id' => $homework_id));
+        $homework = $this->_homeworkModel->getHomework($homework_id);
         $this->view->homework = $homework;
         
         $form = new Student_Form_Homework();
@@ -44,14 +44,14 @@ class Student_HomeworkController extends Zend_Controller_Action
             }
         }
         $dateTimeModel = new Application_Model_Datetime();
-        $this->view->homework_status = $dateTimeModel->is_accessible($homework->finish_time);
+        $this->view->homework_status = $dateTimeModel->is_accessible($homework->hw_finish_time);
         $this->view->form = $form;
     }
 
     public function lessonHomeworksAction()
     {
         $lesson_id = $this->_getParam('id');
-        $this->view->homeworks = $this->_homeworkModel->getAll(array('lesson_id' => $lesson_id));
+        $this->view->homeworks = $this->_homeworkModel->getLessonHomeworks($lesson_id);
     }
 }
 

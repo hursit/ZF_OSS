@@ -92,6 +92,25 @@ class Application_Model_DbTable_Exam extends Zend_Db_Table_Abstract
                 ->join('class AS c', 'l.class_id=c.id',array('c.name as class_name'));
         return $this->fetchAll($filter);
     }   
+    
+    public function studentNextExams($student_id,$limit = NULL){
+        $studentLessons = $this->select()->setIntegrityCheck(false)->from('lesson_student', array('lesson_id'))->where('student_id = '.$student_id);
+        $now = (string)date("Y/m/d H:i:s");
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS e',array('e.id as exam_id','e.title as exam_title','e.start_time as exam_start_time','e.finish_time as exam_finish_time'))
+                ->where('e.lesson_id in ?', $studentLessons)
+                ->where('e.start_time > ?', $now)
+                ->join('lesson AS l', 'e.lesson_id=l.id', array('l.name as lesson_name'))
+                ->join('members AS m', 'l.teacher_id=m.id', array('m.name as teacher_name', 'm.surname as teacher_surname'))
+                ->join('department AS d', 'l.department_id=d.id', array('d.name as department_name'))
+                ->join('class AS c', 'l.class_id=c.id', array('c.name as class_name'))
+                ->order('e.start_time DESC');
+       if($limit){
+           $filter->limit($limit);
+       }
+        return $this->fetchAll($filter);    
+    }
     public function getExam($exam_id){
         $filter = $this->select();
         $filter->setIntegrityCheck(false);

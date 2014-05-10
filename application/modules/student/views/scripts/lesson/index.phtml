@@ -31,18 +31,36 @@
                                       </tr>
                               </thead>   
                               <tbody>
-                                  <?php if(count($this->lessons)){
-                                      $memberModel = new Application_Model_DbTable_Members();
-                                      $classModel = new Application_Model_DbTable_Class();
-                                      $lessonModel = new Application_Model_DbTable_Lesson();
-                                      foreach ($this->lessons as $lesson) {
-                                            $thisLesson = $lessonModel->getByFilter(array('id' => $lesson->lesson_id));
+                                  <?php if(count($this->lessonsWithTeacher)){
+                                      foreach ($this->lessonsWithTeacher as $lesson) {
                                        ?>
                                     
                                     <tr>
-                                            <td><?php echo $thisLesson->name; ?></td>
-                                            <td><?php echo $classModel->getByFilter(array('id' => $thisLesson->class_id))->name ;?></td>
-                                            <td class="center"><?php echo $memberModel->getByFilter(array('id' => $thisLesson->teacher_id))->name?></td>
+                                            <td><?php echo $lesson->lesson_name; ?></td>
+                                            <td><?php echo $lesson->class_name ;?></td>
+                                            <td class="center"><?php echo $lesson->teacher_name." ".$lesson->teacher_surname?></td>
+                                            <td class="center">
+                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/student/homework/lesson-homeworks/'.$lesson->lesson_id);?>">
+                                                            <i class="icon-zoom-in icon-white"></i>  
+                                                            Ödevler                                            
+                                                    </a>
+                                                    <a class="btn btn-info" href="<?php echo $this->baseUrl('/student/exam/lesson-exams/'.$lesson->lesson_id);?>">
+                                                            <i class="icon-zoom-in icon-white"></i>  
+                                                            Sınavlar                                            
+                                                    </a>
+                                            </td>
+                                    </tr>
+                                  <?php  }};?>
+                                    
+                                    
+                                  <?php if(count($this->lessonsWithNoTeacher)){
+                                      foreach ($this->lessonsWithNoTeacher as $lesson) {
+                                       ?>
+                                    
+                                    <tr>
+                                            <td><?php echo $lesson->lesson_name; ?></td>
+                                            <td><?php echo $lesson->class_name ;?></td>
+                                            <td class="center">Atanmadı</td>
                                             <td class="center">
                                                     <a class="btn btn-success" href="<?php echo $this->baseUrl('/student/homework/lesson-homeworks/'.$lesson->lesson_id);?>">
                                                             <i class="icon-zoom-in icon-white"></i>  

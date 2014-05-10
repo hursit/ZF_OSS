@@ -88,6 +88,7 @@ class Application_Model_DbTable_Announcement extends Zend_Db_Table_Abstract
     }
     //Ders Sınıf ve bölüm Girildiyse
     public function getAllAnnouncementsWithLesson($teacher_id = NULL){
+        
         $filter = $this->select();
         $filter->setIntegrityCheck(false);
         $filter->from($this->_name . ' AS a', array('a.id as ann_id','a.title as ann_title','a.id as ann_id','a.detail as ann_detail','a.time as ann_time'))

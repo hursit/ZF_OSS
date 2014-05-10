@@ -20,7 +20,8 @@ class Student_LessonController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $this->view->lessons = $this->_lessonStudentModel->getAll(array('student_id' => $this->_user->id));
+        $this->view->lessonsWithTeacher = $this->_lessonStudentModel->getStudentLessonsWithTeacher($this->_user->id);
+        $this->view->lessonsWithNoTeacher = $this->_lessonStudentModel->getStudentLessonsWithNoTeacher($this->_user->id);
     }
 
     public function departmentLessonsAction()

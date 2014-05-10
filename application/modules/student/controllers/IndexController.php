@@ -22,11 +22,11 @@ class Student_IndexController extends Zend_Controller_Action
         
         //Odevler 10 tane
         $homeworkModel = new Application_Model_DbTable_Homework();
-        $this->view->homeworks = $homeworkModel->studentHomeworks($this->_user->id,10);
+        $this->view->homeworks = $homeworkModel->studentNextHomeworks($this->_user->id,10);
         
         //Sınavlar 10 tane
         $examModel = new Application_Model_DbTable_Exam();
-        $this->view->exams = $examModel->studentExams($this->_user->id,10);
+        $this->view->exams = $examModel->studentNextExams($this->_user->id,10);
     
         // test
         // print_r($homeworkModel->studentHomeworks($this->_user->id)->toArray());

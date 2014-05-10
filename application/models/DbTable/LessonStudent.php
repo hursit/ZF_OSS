@@ -104,13 +104,27 @@ class Application_Model_DbTable_LessonStudent extends Zend_Db_Table_Abstract
                 ->join('class AS c','l.class_id=c.id',array('c.name as class_name'));
         return $this->fetchAll($filter);
     }
-    public function getStudentLessons($student_id){
+    public function getStudentLessonsWithTeacher($student_id){
         $filter = $this->select();
         $filter->setIntegrityCheck(false);
         $filter->from($this->_name . ' AS ls')
                 ->where('ls.student_id = ?', $student_id)
-                ->join('lesson AS l', 'ls.lesson_id=l.id',array('l.name as lesson_name'))
-                ->join('class AS c','l.class_id=c.id',array('c.name as class_name'));
+                ->join('lesson AS l', 'ls.lesson_id=l.id',array('l.name as lesson_name','l.id as lesson_id'))
+                ->where('l.teacher_id != ?', 0)
+                ->join('class AS c','l.class_id=c.id',array('c.name as class_name'))
+                ->join('members AS m','l.teacher_id=m.id',array('m.name as teacher_name','m.surname as teacher_surname'))
+                ->join('department AS d','l.department_id=d.id',array('d.name as department_name'));
+        return $this->fetchAll($filter);
+    }
+    public function getStudentLessonsWithNoTeacher($student_id){
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS ls')
+                ->where('ls.student_id = ?', $student_id)
+                ->join('lesson AS l', 'ls.lesson_id=l.id',array('l.name as lesson_name','l.id as lesson_id'))
+                ->where('l.teacher_id = ?', 0)
+                ->join('class AS c','l.class_id=c.id',array('c.name as class_name'))
+                ->join('department AS d','l.department_id=d.id',array('d.name as department_name'));
         return $this->fetchAll($filter);
     }
     ///for teacher module. Teacher's waiting students

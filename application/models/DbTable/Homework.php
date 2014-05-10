@@ -50,24 +50,25 @@ class Application_Model_DbTable_Homework extends Zend_Db_Table_Abstract
         $this->update($data,'id = '.(int)$id);
     }
     
-    public function studentHomeworks($student_id,$limit=NULL){
-        $lessonStudentModel = new Application_Model_DbTable_LessonStudent();
+    public function studentNextHomeworks($student_id,$limit = NULL){
+        $studentLessons = $this->select()->setIntegrityCheck(false)->from('lesson_student', array('lesson_id'))->where('student_id = '.$student_id);
+        $now = (string)date("Y/m/d H:i:s");
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS hw',array('hw.id as hw_id','hw.title as hw_title','hw.finish_time as hw_finish_time'))
+                ->where('hw.lesson_id in ?', $studentLessons)
+                ->where('hw.finish_time > ?', $now)
+                ->join('lesson AS l', 'hw.lesson_id=l.id', array('l.name as lesson_name'))
+                ->join('members AS m', 'l.teacher_id=m.id', array('m.name as teacher_name', 'm.surname as teacher_surname'))
+                ->join('department AS d', 'l.department_id=d.id', array('d.name as department_name'))
+                ->join('class AS c', 'l.class_id=c.id', array('c.name as class_name'))
+                ->order('hw.finish_time DESC');
+       if($limit){
+           $filter->limit($limit);
+       }
+        return $this->fetchAll($filter);
+    
         
-        // (1,2,3,4) gibi alıyoruz.
-        $lessons = $lessonStudentModel->studentLessons($student_id);
-        
-        //Şimdiden sonraki ödevler.
-        $now = date("Y/m/d H:i:s");
-        if($lessons != "()"){
-            $select = $this->select()
-                       ->order('finish_time asc')
-                       ->where('finish_time > ?',$now)
-                       ->where('lesson_id in '.$lessons);
-            if($limit){
-                $select->limit($limit,0);
-            }
-            return $this->fetchAll($select);
-        }        
     }
     
     public function getHomework($homework_id){
@@ -84,7 +85,19 @@ class Application_Model_DbTable_Homework extends Zend_Db_Table_Abstract
         $filter = $this->select();
         $filter->setIntegrityCheck(false);
         $filter->from($this->_name . ' AS hw',array('hw.id as hw_id','hw.title as hw_title','hw.finish_time as hw_finish_time'))
+                ->where('hw.teacher_id = ?',$teacher_id)
                 ->join('lesson AS l', 'hw.lesson_id=l.id', array('l.name as lesson_name'))
+                ->join('department AS d', 'l.department_id=d.id', array('d.name as department_name'))
+                ->join('class AS c', 'l.class_id=c.id', array('c.name as class_name'));
+        return $this->fetchAll($filter);
+    }
+    public function getLessonHomeworks($lesson_id){
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS hw',array('hw.id as hw_id','hw.title as hw_title','hw.finish_time as hw_finish_time'))
+                ->where('hw.lesson_id = ?', $lesson_id)
+                ->join('lesson AS l', 'hw.lesson_id=l.id', array('l.name as lesson_name'))
+                ->join('members AS m', 'l.teacher_id=m.id', array('m.name as teacher_name', 'm.surname as teacher_surname'))
                 ->join('department AS d', 'l.department_id=d.id', array('d.name as department_name'))
                 ->join('class AS c', 'l.class_id=c.id', array('c.name as class_name'));
         return $this->fetchAll($filter);
