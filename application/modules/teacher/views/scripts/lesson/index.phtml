@@ -27,53 +27,44 @@
                                               <th>Adı</th>
                                               <th>Bölüm</th>
                                               <th>Sınıfı</th>
-                                              <th>Öğrenci Sayısı</th>
                                               <th></th>
                                       </tr>
                               </thead>   
                               <tbody>
                                   <?php if(count($this->lessons)){
-                                      $memberModel = new Application_Model_DbTable_Members();
-                                      $classModel = new Application_Model_DbTable_Class();
-                                      $lessonStudentModel = new Application_Model_DbTable_LessonStudent();
-                                      $departmentModel = new Application_Model_DbTable_Department();
                                       foreach ($this->lessons as $lesson) {
-                                            $member = $memberModel->getByFilter(array('id' => $lesson['teacher_id']));
-                                            $class = $classModel->getByFilter(array('id' => $lesson['class_id']));
-                                            $numberOfStudent = count($lessonStudentModel->getAll(array('lesson_id' => $lesson->id)));
                                        ?>
                                     
                                     <tr>
-                                            <td class="center"><?php echo $lesson->name; ?></td>
-                                            <td><?php echo $departmentModel->getByFilter(array('id' => $lesson['department_id']))->name;?></td>
-                                            <td class="center"><?php echo ucfirst($class->name);?></td>
-                                            <td class="center"><?php echo $numberOfStudent; ?></td>
+                                            <td class="center"><?php echo $lesson->les_name; ?></td>
+                                            <td><?php echo $lesson->department_name;?></td>
+                                            <td class="center"><?php echo ucfirst($lesson->class_name);?></td>
                                             <td class="center">
-                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/lesson/lesson-students/'.$lesson['id']);?>">
+                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/lesson/lesson-students/'.$lesson->les_id);?>">
                                                             <i class="icon-zoom-in icon-white"></i>  
                                                             Alan Öğrenciler                                            
                                                     </a>
-                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/homework/lesson-homeworks/'.$lesson['id']);?>">
+                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/homework/lesson-homeworks/'.$lesson->les_id);?>">
                                                             <i class="icon-zoom-in icon-white"></i>  
                                                             Ödevler                                            
                                                     </a>
-                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/exams/lesson-exams/'.$lesson['id']);?>">
+                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/exams/lesson-exams/'.$lesson->les_id);?>">
                                                             <i class="icon-zoom-in icon-white"></i>  
                                                             Sınavlar                                            
                                                     </a>
-                                                <?php if($lesson['is_deleted'] == 'false'){ ?>
-                                                    <a class="btn btn-danger" href="<?php echo $this->baseUrl().'/teacher/lesson/un-publish/' . $lesson['id'];?>">
+                                                <?php if($lesson->les_is_deleted == 'false'){ ?>
+                                                    <a class="btn btn-danger" href="<?php echo $this->baseUrl().'/teacher/lesson/un-publish/' . $lesson->les_id;?>">
                                                             <i class="icon-trash icon-white"></i> 
                                                             Yayından Kaldır
                                                     </a>
                                                 <?php } else { ?>
-                                                    <a class="btn btn-warning" href="<?php echo $this->baseUrl().'/teacher/lesson/publish/' . $lesson['id'];?>">
+                                                    <a class="btn btn-warning" href="<?php echo $this->baseUrl().'/teacher/lesson/publish/' . $lesson->les_id;?>">
                                                             <i class="icon-trash icon-white"></i> 
                                                             Yayınla
                                                     </a>
                                                 <?php }  ?>
                                                 
-                                                    <a class="btn btn-warning" href="<?php echo $this->baseUrl().'/teacher/lesson/student-list/' . $lesson['id'];?>">
+                                                    <a class="btn btn-warning" href="<?php echo $this->baseUrl().'/teacher/lesson/student-list/' . $lesson->les_id;?>">
                                                             <i class="icon-trash icon-white"></i> 
                                                             Pdf Öğr.Listesi
                                                     </a>

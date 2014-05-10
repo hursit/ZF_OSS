@@ -32,22 +32,18 @@
                               <tbody>
                                   <?php if(count($this->homeworks)){
                                     foreach ($this->homeworks as $homework) {
-                                        $departmentModel = new Application_Model_DbTable_Department();
-                                        $classModel = new Application_Model_DbTable_Class();
-                                        $lessonModel = new Application_Model_DbTable_Lesson();
-                                        
                                   ?>
                                     <tr>
-                                        <td class="center"><?php echo $departmentModel->getByFilter(array('id' => $homework['department_id']))->name?></td>
-                                        <td class="center"><?php echo $lessonModel->getByFilter(array('id' => $homework['lesson_id']))->name; ?></td>
-                                            <td class="center"><?php echo substr($homework['title'], 0, 60)?></td>
-                                            <td class="center"><?php echo $homework['finish_time']?></td>
+                                        <td class="center"><?php echo $homework->department_name?></td>
+                                        <td class="center"><?php echo $homework->lesson_name; ?></td>
+                                            <td class="center"><?php echo substr($homework->hw_title, 0, 60)?></td>
+                                            <td class="center"><?php echo $homework->hw_finish_time?></td>
                                             <td class="center">
-                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/homework/show/'.$homework['id']);?>">
+                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/homework/show/'.$homework->hw_id);?>">
                                                             <i class="icon-zoom-in icon-white"></i>  
                                                             Görüntüle                                            
                                                     </a>
-                                                    <a class="btn btn-info" href="<?php echo $this->baseUrl('/teacher/homework/edit/'.$homework['id']);?>">
+                                                    <a class="btn btn-info" href="<?php echo $this->baseUrl('/teacher/homework/edit/'.$homework->hw_id);?>">
                                                             <i class="icon-edit icon-white"></i>  
                                                             Düzenle                                            
                                                     </a>
@@ -55,7 +51,7 @@
                                                             <i class="icon-trash icon-white"></i> 
                                                             Sil
                                                     </a>
-                                                    <a class="btn btn-danger" href="<?php echo $this->baseUrl('/teacher/homework/pdf-download/'.$homework['id']);?>">
+                                                    <a class="btn btn-danger" href="<?php echo $this->baseUrl('/teacher/homework/pdf-download/'.$homework->hw_id);?>">
                                                             <i class="icon-trash icon-white"></i> 
                                                             Pdf Olarak İndir
                                                     </a>

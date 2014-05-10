@@ -4,20 +4,17 @@
 						<a href="#">Anasayfa</a> <span class="divider">/</span>
 					</li>
 					<li>
-                                            <a href="#">Diğer Bölüm Dersleri</a><span class="divider">/</span>
+                                            <a href="#"><?php echo ucfirst($this->departmentName);?></a><span class="divider">/</span>
 					</li>
 					<li>
 						<a href="#">Dersler</a>
 					</li>
 				
 </div>
-<?php if(count($this->classes)){
-  foreach ($this->classes as $class) { ?>
-  
-        <div class="row-fluid sortable">		
+    <div class="row-fluid sortable">		
             <div class="box span12">
                     <div class="box-header well" data-original-title>
-                            <h2><i class="icon-user"></i><?php echo $class->name;?></h2>
+                            <h2><i class="icon-user"></i> Dersler</h2>
                             <div class="box-icon">
                                     <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
                                     <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -34,48 +31,53 @@
                                       </tr>
                               </thead>   
                               <tbody>
-                            <?php 
-                                $lessonModel = new Application_Model_DbTable_Lesson();
-                                $lessons = $lessonModel->getAll(array('class_id' => $class->id));
-                                if(count($lessons)){
-                                      $memberModel = new Application_Model_DbTable_Members();
-                                      $classModel = new Application_Model_DbTable_Class();
-                                      foreach ($lessons as $lesson) {
-                                            $thisLesson = $lessonModel->getByFilter(array('id' => $lesson->id));
-                                            $teacher = $lesson->teacher_id;
-                                            if($lesson->teacher_id){
-                                                $thisTeacher = $memberModel->getByFilter(array('id'=> $lesson->teacher_id));
-                                                $teacher = $thisTeacher->name." ".$thisTeacher->surname;
-                                            }else{
-                                                $teacher = "Öğretmen henüz atanmadı.";
-                                            }
+                                  <?php if(count($this->lessonsWithTeacher)){
+                                      foreach ($this->lessonsWithTeacher as $lesson) {
                                        ?>
                                     
                                     <tr>
-                                            <td><?php echo $thisLesson->name; ?></td>
-                                            <td><?php echo $classModel->getByFilter(array('id' => $thisLesson->class_id))->name ;?></td>
-                                            <td class="center"><?php echo $teacher; ?></td>
+                                            <td class="center"><?php echo $lesson->les_name;?></td>
+                                            <td class="center"><?php echo ucfirst($lesson->class_name);?></td>
+                                            <td class="center"><?php echo $lesson->teac_name." ".$lesson->teac_surname?></td>
                                             <td class="center">
-                                            <?php if(!in_array($lesson->id, $this->studentLessons)){ ?>
-                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/student/lesson/add-lesson-application/'.$lesson->id);?>">
+                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/lesson/lesson-students/'.$lesson->les_id);?>">
                                                             <i class="icon-zoom-in icon-white"></i>  
-                                                            Kaydolmak için başvur                                            
+                                                            Derse Kaydol                                            
                                                     </a>
-                                            <?php } else{ ?>
-                                                    <a class="btn btn-danger" href="<?php echo $this->baseUrl('/student/lesson/delete-lesson-application/'.$lesson->id);?>">
-                                                            <i class="icon-zoom-in icon-white"></i>  
-                                                            Kaydı Silmek İçin Başvur                                            
-                                                    </a>
-                                            <?php } ?>
                                             </td>
                                     </tr>
                                   <?php  }};?>
-                              </tbody>
+                      
+                                <?php if(count($this->lessonsWithNoTeacher)){
+                                      foreach ($this->lessonsWithNoTeacher as $lesson) {
+                                       ?>
+                                    
+                                    <tr>
+                                            <td class="center"><?php echo $lesson->les_name;?></td>
+                                            <td class="center"><?php echo ucfirst($lesson->class_name);?></td>
+                                            <td class="center">Atanmadı</td>
+                                            <td class="center">
+                                                    <?php
+                                                    $studentLessonModel = new Application_Model_DbTable_LessonStudent();
+                                                    $status = $studentLessonModel->getByFilter(array('student_id' => $this->user->id,'lesson_id' => $lesson->les_id));
+                                                    if(!count($status)){ ?>
+                                                        
+                                                        <a class="btn btn-success" href="<?php echo $this->baseUrl('/student/lesson/add-lesson-application/'.$lesson->les_id);?>">
+                                                            <i class="icon-zoom-in icon-white"></i>  
+                                                            Derse Kaydol                                            
+                                                        </a>
+                                                    <?php
+                                                         
+                                                    }
+                                                    ?>                                                    
+                                            </td>
+                                    </tr>
+                                  <?php  }}?>
+                                    
+                                    
+                        </tbody>
                       </table>            
                     </div>
             </div><!--/span-->
 
     </div><!--/row-->
-<?php
-    };
-}?>

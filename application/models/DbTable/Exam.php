@@ -60,10 +60,16 @@ class Application_Model_DbTable_Exam extends Zend_Db_Table_Abstract
     }
     public function futureExams($teacher_id){
         $now = (string)date("Y/m/d H:i:s");
-        $select = $this->select();
-        $select->where('start_time >?',$now)
-                ->where('teacher_id =?', $teacher_id);
-        return $this->fetchAll($select);
+    
+        $teacherLessons = $this->select()->setIntegrityCheck(false)->from('lesson', array('id'))->where('teacher_id = '.$teacher_id);
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS e',array('e.id as exam_id','e.title as exam_title','e.start_time as exam_start_time','e.finish_time as exam_finish_time','e.type as exam_type'))
+                ->where('e.lesson_id in ?',$teacherLessons)
+                ->join('lesson AS l', 'e.lesson_id=l.id',array('l.name as lesson_name'))
+                ->join('department AS d', 'l.department_id=d.id',array('d.name as department_name'))
+                ->join('class AS c', 'l.class_id=c.id',array('c.name as class_name'));
+        return $this->fetchAll($filter);
     }
     public function historyExams($teacher_id){
         $now = date("Y/m/d H:i:s");
@@ -72,24 +78,39 @@ class Application_Model_DbTable_Exam extends Zend_Db_Table_Abstract
                 ->where('teacher_id =?', $teacher_id);
         return $this->fetchAll($select);
     }
-      public function studentExams($student_id, $limit=NULL){
-        $lessonStudentModel = new Application_Model_DbTable_LessonStudent();
-        
-        // (1,2,3,4) gibi alıyoruz.
-        $lessons = $lessonStudentModel->studentLessons($student_id);
-        if($lessons != "()"){
-             //Şimdiden sonraki ödevler.
-            $now = date("Y/m/d H:i:s");
-
-            $select = $this->select()
-                       ->order('start_time asc')
-                       ->where('finish_time > ?',$now)
-                       ->where('lesson_id in '.$lessons);
-            if($limit){
-                $select->limit($limit,0);
-            }
-            return $this->fetchAll($select);
-        }
+    public function studentExams($student_id, $limit=NULL){
+        $now = date("Y/m/d H:i:s");
+        $studentLessons = $this->select()->setIntegrityCheck(false)->from('lesson_student', array('lesson_id'))->where('student_id = '.$student_id);
+      
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS e',array('e.id as exam_id','e.title as exam_title','e.start_time as exam_start_time','e.finish_time as exam_finish_time'))
+                ->where('e.lesson_id in ?',$studentLessons)
+                ->join('members AS m', 'e.teacher_id=m.id',array('m.name as student_name','m.surname as student_surname'))
+                ->join('lesson AS l', 'e.lesson_id=l.id',array('l.name as lesson_name'))
+                ->join('department AS d', 'l.department_id=d.id',array('d.name as department_name'))
+                ->join('class AS c', 'l.class_id=c.id',array('c.name as class_name'));
+        return $this->fetchAll($filter);
+    }   
+    public function getExam($exam_id){
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS e',array('e.id as exam_id','e.title as exam_title','e.detail as exam_detail','e.start_time as exam_start_time','e.finish_time as exam_finish_time'))
+                ->join('members AS m', 'e.teacher_id=m.id', array('m.name as teacher_name', 'm.surname as teacher_surname'))
+                ->join('department AS d', 'e.department_id=d.id', array('d.name as department_name'))
+                ->join('class AS c', 'e.class_id=c.id', array('c.name as class_name'))
+                ->join('lesson AS l', 'e.lesson_id=l.id', array('l.name as lesson_name'));
+        return $this->fetchRow($filter);
+    }
+    public function getDepartmentExams($department_id){
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS e',array('e.id as exam_id','e.title as exam_title','e.start_time as exam_start_time','e.finish_time as exam_finish_time'))
+                ->where('e.department_id = ?', $department_id)
+                ->join('members AS m', 'e.teacher_id=m.id', array('m.name as teacher_name', 'm.surname as teacher_surname'))
+                ->join('class AS c', 'e.class_id=c.id', array('c.name as class_name'))
+                ->join('lesson AS l', 'e.lesson_id=l.id', array('l.name as lesson_name'));
+        return $this->fetchAll($filter);
     }
 }
 

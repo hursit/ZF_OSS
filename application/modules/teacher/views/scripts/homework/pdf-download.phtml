@@ -11,7 +11,19 @@
         }
     </style>
     <body>
-        <h1 style='text-align: center'><?php echo $this->homework->title."<br>"; ?></h1>
-        <span style="font-weight:bold;font-size:16px">Detaylar: </span><?php echo $this->homework->detail."<br>"; ?>
+         <fieldset>
+                                  Son Tarih : <?php echo $this->homework->hw_finish_time; ?> <br>
+                                  <h3 style="text-align: center">
+                                      <?php echo $this->homework->department_name; ?><br>
+                                      <?php echo $this->homework->class_name; ?><br>
+                                      <?php echo $this->homework->lesson_name; ?> Dersi <br>
+                                      Öğr. Görevlisi : <?php echo $this->homework->teacher_name." ". $this->homework->teacher_surname; ?>  <hr>
+                                      <?php echo $this->homework->hw_title; ?>
+                                  </h3>
+                                  <div>
+                                      <?php echo $this->homework->hw_detail;?>
+                                  </div>
+                              </fieldset>
+
     </body>
 </html>

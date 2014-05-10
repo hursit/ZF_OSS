@@ -82,24 +82,6 @@ class Application_Model_DbTable_Members extends Zend_Db_Table_Abstract
     //    return $this->fetchAll($select)->toArray();        
     // }
     
-    ///for teacher module. Teacher's waiting students
-    public function getWaitingStudents($teacher_id){
-        $lessonModel = new Application_Model_DbTable_Lesson();
-        $lessons = $lessonModel->getAll(array('teacher_id' => $teacher_id));
-        $students_with_id = array();
-        
-        $lessonStudentModel = new Application_Model_DbTable_LessonStudent(); 
-        foreach ($lessons as $lesson) {
-            $lessonStudentSelect = $lessonStudentModel->select();
-            $lessonStudentSelect->where('confirmation = ?', 'false');
-            $lessonStudentSelect->where('lesson_id = ?', $lesson->id);
-            $results = $lessonStudentModel->fetchAll($lessonStudentSelect);
-            foreach ($results as $result) {
-                array_push($students_with_id, $result);
-            }
-        }
-        return $students_with_id;
-    }
     //public function getMembers($role = 'student'){
     //    $select = $this->select();
     //    $select->where ( 'role = ?', $role);
@@ -155,6 +137,18 @@ class Application_Model_DbTable_Members extends Zend_Db_Table_Abstract
                 ->join('department AS d', 'm.department_id=d.id',array('d.name as department_name'));
         return $this->fetchRow($filter);
     }
+    public function getConfirmationWaitingStudents($department_id){
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS m',array('m.id as student_id','m.studentNumber as student_number','m.name as student_name','m.surname as student_surname','m.time as student_created'))
+                ->where('m.department_id = ?', $department_id)
+                ->where('m.role = ?', 'student')
+                ->where('m.confirmation = ?', 'false')
+                ->join('department AS d', 'm.department_id=d.id',array('d.name as department_name'))
+                ->join('class AS c', 'm.class_id=c.id',array('c.name as class_name'));
+        return $this->fetchAll($filter);
+        
+    }
+    
 }
-
 

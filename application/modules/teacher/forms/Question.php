@@ -86,48 +86,42 @@ class Teacher_Form_Question extends Zend_Form
                 ->setAttrib('class', ' controls span6 typeaead');
         
         $type = new Zend_Form_Element_Select('type');
-        $type->setRequired(true)
-                ->setLabel('Tür')
+        $type->setLabel('Tür')
                 ->addMultiOption('written','yazılı')
                 ->addMultiOption('multiple choice','çoktan seçmeli')
                 ->setRequired(true)
                 ->setAttrib('class', 'control-group');
         
         $choice1 = new Zend_Form_Element_Textarea('choice1');
-        $choice1->setRequired(true)
-                ->setLabel("Cevap - 1")
+        $choice1->setLabel("Cevap - 1")
                 ->setAttrib("style", "display:none")
                 ->setAttrib("rows", 10)
                 ->setAttrib("class","choices")
                 ->setAttrib('placeHolder', 'Cevabınız');
         
         $choice2 = new Zend_Form_Element_Textarea('choice2');
-        $choice2->setRequired(true)
-                ->setLabel("Cevap - 2")
+        $choice2->setLabel("Cevap - 2")
                 ->setAttrib("style", "display:none")
                 ->setAttrib("class","choices")
                 ->setAttrib("rows", 10)
                 ->setAttrib('placeHolder', 'Cevabınız');
         
         $choice3 = new Zend_Form_Element_Textarea('choice3');
-        $choice3->setRequired(true)
-                ->setLabel("Cevap - 3")
+        $choice3->setLabel("Cevap - 3")
                 ->setAttrib("style", "display:none")
                 ->setAttrib("class","choices")
                 ->setAttrib("rows", 10)
                 ->setAttrib('placeHolder', 'Cevabınız');
         
         $choice4 = new Zend_Form_Element_Textarea('choice4');
-        $choice4->setRequired(true)
-                ->setLabel("Cevap - 4")
+        $choice4->setLabel("Cevap - 4")
                 ->setAttrib("style", "display:none")
                 ->setAttrib("class","choices")
                 ->setAttrib("rows", 10)
                 ->setAttrib('placeHolder', 'Cevabınız');
         
         $choice5 = new Zend_Form_Element_Textarea('choice5');
-        $choice5->setRequired(true)
-                ->setLabel("Cevap - 5")
+        $choice5->setLabel("Cevap - 5")
                 ->setAttrib("style", "display:none")
                 ->setAttrib("class","choices")
                 ->setAttrib("rows", 10)

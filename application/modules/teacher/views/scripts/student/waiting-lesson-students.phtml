@@ -26,27 +26,19 @@
                                               <th>Bölüm</th>
                                               <th>Sınıf</th>
                                               <th>Ders</th>
-                                              <th>Kayıt Zamanı</th>
                                               <th></th>
                                       </tr>
                               </thead>   
                               <tbody>
                                   <?php if(count($this->waitingStudents)){
-                                    $departmentModel = new Application_Model_DbTable_Department();
-                                    $classModel = new Application_Model_DbTable_Class();
-                                    $lessonModel = new Application_Model_DbTable_Lesson();
-                                    $memberModel = new Application_Model_DbTable_Members();
                                     foreach ($this->waitingStudents as $result) { 
-                                        $student = $memberModel->getByFilter(array('id' => $result->student_id));
                                      ?>
-                                        
                                     <tr>
-                                            <td class="center"><?php echo $student->name; ?></td>
-                                            <td class="center"><?php echo $student->surname; ?></td>
-                                            <td class="center"><?php echo $departmentModel->getByFilter(array('id' => $student->department_id))->name; ?></td>
-                                            <td class="center"><?php echo $classModel->getByFilter(array('id' => $student->class_id))->name; ?></td>
-                                            <td class="center"><?php echo $lessonModel->getByFilter(array('id' => $result->lesson_id))->name; ?></td>
-                                            <td class="center"><?php echo $result->time; ?></td>
+                                            <td class="center"><?php echo $result->student_name; ?></td>
+                                            <td class="center"><?php echo $result->student_surname; ?></td>
+                                            <td class="center"><?php echo $result->department_name; ?></td>
+                                            <td class="center"><?php echo $result->class_name; ?></td>
+                                            <td class="center"><?php echo $result->lesson_name; ?></td>
                                             <td class="center">
                                                     <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/lesson/confirmed-student-lesson-application/'.$result->lesson_id."/".$result->student_id);?>">
                                                             <i class="icon-edit icon-white"></i>  

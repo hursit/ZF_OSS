@@ -11,7 +11,23 @@
         }
     </style>
     <body>
-        <h1 style='text-align: center'><?php echo $this->announcement->title."<br>"; ?></h1>
+        <h1 style='text-align: center'>
+            <?php $departmentModel = new Application_Model_DbTable_Department();
+                echo $departmentModel->getByFilter(array('id' =>  $this->announcement->department_id))->name ;
+                echo "<br>";
+                if($this->announcement->class_id){
+                    $classModel = new Application_Model_DbTable_Class();
+                    echo $classModel->getByFilter(array('id' =>  $this->announcement->class_id))->name ;
+                    echo "<br>";
+                }
+                if($this->announcement->lesson_id){
+                    $lessonModel = new Application_Model_DbTable_Lesson();
+                    echo $lessonModel->getByFilter(array('id' =>  $this->announcement->lesson_id))->name ;
+                    echo " Dersi <br><br></h1>";
+                }
+                echo "<h2>".$this->announcement->title."</h2><br>"; ?>
+        
+        </h1>
         <span style="font-weight:bold;font-size:16px">Detaylar: </span><?php echo $this->announcement->detail."<br>"; ?>
     </body>
 </html>

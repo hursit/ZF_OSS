@@ -20,16 +20,41 @@
                                     <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
                             </div>
                     </div>
-                <div class="box-content">
-                              <fieldset>
-                                  Baslık : <?php echo $this->exam->title; ?> <br>
-                                  Detay : <?php echo $this->exam->detail; ?> <br>
-                                  Başlangıç : <?php echo $this->exam->start_time; ?> <br>
-                                  Bitiş : <?php echo $this->exam->finish_time; ?> <br>
-                                  Girecek Öğrenciler : /// Doldurulacak<br>
-                                  Sorular /// Doldurulacak
-                              </fieldset>
+                <div class="box-content well">
+                                    <fieldset>
+                                  Başlangıç-Bitiş Tarihi : <?php echo $this->exam->exam_start_time." - ".$this->exam->exam_finish_time; ?> <br>
+                                  <h3 style="text-align: center">
+                                      <?php echo $this->exam->department_name; ?><br>
+                                      <?php echo $this->exam->class_name; ?><br>
+                                      <?php echo $this->exam->lesson_name; ?> Dersi <br>
+                                      Öğr. Görevlisi : <?php echo $this->exam->teacher_name." ". $this->exam->teacher_surname; ?>  <hr>
+                                      <?php echo $this->exam->exam_title; ?>
+                                  </h3>
+                                  <div class="well">
+                                      <?php echo $this->exam->exam_detail;?>
+                                  </div><br><br>
+                                  <fieldset>
+                                      <legend>Sorular</legend>
+                                                 <?php if(count($this->questions)){
+                                                        $i = 1;
+                                                        $choicesModel = new Application_Model_DbTable_Choices();
+                                                        foreach ($this->questions as $question) { ?>
+                                                           <div style="font-weight:bold;font-size:14px;color:brown"><?php echo $i."-) ".$question->question; ?></div><br>
+                                                                <?php if($question->type = "multiple choice"){
+                                                                    echo "<ul style='list-style-type:lower-alpha'>";
+                                                                    foreach ($choicesModel->getAll(array("question_id" => $question->id)) as $choice) {
+                                                                        echo "<li style='font-weight:bold;font-size:14'>".$choice->choice."</li><br>";
+                                                                    } 
+                                                                    echo "</ul>";
+                                                                }?>
+                                                     <?php
+                                                        $i+=1; 
+                                                            }
+                                                        }; 
+                                                    ?>
 
+                                  </fieldset>
+                              </fieldset>
                     </div>
             </div><!--/span-->
 

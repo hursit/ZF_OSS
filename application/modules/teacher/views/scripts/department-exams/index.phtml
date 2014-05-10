@@ -22,28 +22,26 @@
                             <table class="table table-striped table-bordered bootstrap-datatable datatable">
                               <thead>
                                       <tr>
-                                              <th>Zaman</th>
-                                              <th>Başlık</th>
+                                              <th>Başlangıç</th>
+                                              <th>Bitiş</th>
+                                              <th>Sınıf</th>
                                               <th>Ders</th>
                                               <th>Öğretim Görevlisi</th>
-                                              <th>Sınav Süresi</th>
                                       </tr>
                               </thead>   
                               <tbody>
                                   <?php if(count($this->exams)){
-                                    $memberModel = new Application_Model_DbTable_Members();
-                                    $lessonModel = new Application_Model_DbTable_Lesson();
                                     foreach ($this->exams as $exam) {
                                   ?>
 
 
                                     <tr>
-                                            <td class="center"><?php echo $exam->start_time; ?></td>
-                                            <td class="center"><?php echo $exam->title; ?></td>
-                                            <td class="center"><?php echo $lessonModel->getByFilter(array('id' => $exam->lesson_id))->name; ?></td>
-                                            <td class="center"><?php echo $memberModel->getByFilter(array('id' => $exam->teacher_id))->name; ?></td>
-                                            <td class="center"><?php echo $exam->exam_time; ?></td>
-                                           
+                                            <td class="center"><?php echo $exam->exam_start_time; ?></td>
+                                            <td class="center"><?php echo $exam->exam_finish_time; ?></td>
+                                            <td class="center"><?php echo $exam->class_name; ?></td>
+                                            <td class="center"><?php echo $exam->lesson_name;?></td>
+                                            <td class="center"><?php echo $exam->teacher_name." ".$exam->teacher_surname ?></td>
+                                            
                                   <?php  }};?>
                               </tbody>
                       </table>            

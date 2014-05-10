@@ -13,6 +13,9 @@ class Teacher_ExamsController extends Zend_Controller_Action
         $this->_user = $auth->getIdentity();
         $this->view->user = $this->_user;
         $this->_examModel = new Application_Model_DbTable_Exam();
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+        $this->view->messages = $this->_helper->flashMessenger->getMessages();
+    
     }
 
     public function indexAction()
@@ -85,7 +88,7 @@ class Teacher_ExamsController extends Zend_Controller_Action
                 $this->_helper->flashMessenger("Sınav başarıyla güncellendi");
                 $this->_helper->redirector->gotoRoute(array(
                                             'action' => 'index',
-                                            'controller' => 'exams',
+                                            'controller' => 'lesson',
                                             'module' => 'teacher'));
             } catch (Exception $exc) {
                 echo $exc->getTraceAsString();
@@ -99,7 +102,9 @@ class Teacher_ExamsController extends Zend_Controller_Action
     public function showAction()
     {
         $exam_id = $this->_getParam('id');
-        $this->view->exam = $this->_examModel->getByFilter(array('id' => $exam_id));
+        $questionModel = new Application_Model_DbTable_Questions();
+        $this->view->questions = $questionModel->getAll(array('exam_id' => $exam_id));
+        $this->view->exam = $this->_examModel->getExam($exam_id);
     }
 
     public function questionsAction()
@@ -279,7 +284,7 @@ class Teacher_ExamsController extends Zend_Controller_Action
         $exam_id = $this->_getParam('id');
         $questionModel = new Application_Model_DbTable_Questions();
         
-        $exam = $this->_examModel->getByFilter(array('id'=> $exam_id));
+        $exam = $this->_examModel->getExam($exam_id);
         $questions = $questionModel->getAll(array('exam_id' => $exam_id));
        
         //pdf writer kütüphanemiz
@@ -287,7 +292,7 @@ class Teacher_ExamsController extends Zend_Controller_Action
         $pdfWriter = new mPDF();
         $page = $this->view->partial('exams/pdf-download.phtml', 'teacher', array('exam' => $exam, 'questions' => $questions));
         $pdfWriter->WriteHTML($page);
-        $pdfWriter->Output($exam->title."_sinavi_sorulari.pdf","D"); 
+        $pdfWriter->Output(substr($exam->exam_title,0,50)."_sinavi_sorulari.pdf","D"); 
         exit;
     }
 }

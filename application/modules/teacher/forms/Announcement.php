@@ -21,7 +21,6 @@ class Teacher_Form_Announcement extends Zend_Form
         $detail = new Zend_Form_Element_Textarea('detail');
         $detail->setRequired(true)
                 ->setLabel('Duyuru')
-                ->setRequired(true)
                 ->setAttrib('class', 'control-group  controls cleditor');
         
         $departmentId = new Zend_Form_Element_Select('department_id');
@@ -45,12 +44,6 @@ class Teacher_Form_Announcement extends Zend_Form
         $lessonId->setRegisterInArrayValidator(false)
                  ->addMultiOption('' ,'Lütfen Dersi Seçiniz')
                  ->setLabel('Ders');
-        
-        $classId = new Zend_Form_Element_Select('class_id');
-        $classModel = new Application_Model_DbTable_Class();
-        $classId->setLabel('Sınıf')
-                ->addMultiOption('' ,'Lütfen Sınıfı Seçiniz')
-                ->addMultiOptions($classModel->getAllAsPairs());
         
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setLabel('Duyuruyu Kaydet')

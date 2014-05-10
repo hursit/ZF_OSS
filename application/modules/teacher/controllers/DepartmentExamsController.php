@@ -16,9 +16,7 @@ class Teacher_DepartmentExamsController extends Zend_Controller_Action
     }
     public function indexAction()
     {
-         $this->view->exams = $this->_examModel->getAll(array('department_id' => $this->_user->department_id));
+         $this->view->exams = $this->_examModel->getDepartmentExams($this->_user->department_id);
     }
-
-
 }
 

@@ -13,12 +13,14 @@ class Teacher_HomeworkController extends Zend_Controller_Action
         $this->_user = $auth->getIdentity();
         $this->view->user = $this->_user;
         $this->_homeworkModel = new Application_Model_DbTable_Homework();
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+        $this->view->messages = $this->_helper->flashMessenger->getMessages();
+    
     }
 
     public function indexAction()
     {
-        $this->view->homeworks = $this->_homeworkModel->getAll(array(
-                                                            'teacher_id' => $this->_user->id));
+        $this->view->homeworks = $this->_homeworkModel->getTeacherHomeworks($this->_user->id);
     }
 
     public function lessonHomeworksAction()
@@ -66,7 +68,7 @@ class Teacher_HomeworkController extends Zend_Controller_Action
     public function showAction()
     {
         $homework_id = $this->_getParam('id');
-        $this->view->homework = $this->_homeworkModel->getByFilter(array('id' => $homework_id));
+        $this->view->homework = $this->_homeworkModel->getHomework($homework_id);
     }
 
     public function editAction()
@@ -97,14 +99,14 @@ class Teacher_HomeworkController extends Zend_Controller_Action
         $homework_id = $this->_getParam('id');
         $questionModel = new Application_Model_DbTable_Questions();
         
-        $homework = $this->_homeworkModel->getByFilter(array('id'=> $homework_id));
+        $homework = $this->_homeworkModel->getHomework($homework_id);
        
         //pdf writer kütüphanemiz
         require_once APPLICATION_PATH.'/../library/Mylibrary/mpdf/mpdf.php';
         $pdfWriter = new mPDF();
         $page = $this->view->partial('homework/pdf-download.phtml', 'teacher', array('homework' => $homework));
         $pdfWriter->WriteHTML($page);
-        $pdfWriter->Output();
+        $pdfWriter->Output(substr($homework->hw_title,0,20)."_ödev.pdf","D"); 
         exit;
     }
 

@@ -20,7 +20,10 @@ class Teacher_AnnouncementController extends Zend_Controller_Action
     public function indexAction()
     {
         $dbTable = new Application_Model_DbTable_Announcement();
-        $this->view->announcements = $dbTable->getAll(array('teacher_id' => $this->_user->id));
+        
+        $this->view->my_announcements_with_lesson = $this->_announcementModel->getAllAnnouncementsWithLesson($this->_user->id);
+        $this->view->my_announcements_with_class = $this->_announcementModel->getAllAnnouncementsWithClass($this->_user->id);
+        $this->view->my_announcements_with_department = $this->_announcementModel->getAllAnnouncementsWithDepartment($this->_user->id);
         
         $form = new Teacher_Form_Announcement(array('teacher_id' => $this->_user->id));
         $form->init();
@@ -49,13 +52,13 @@ class Teacher_AnnouncementController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
         $department_id = $this->_request->getParam('department_id');
         $class_id = $this->_request->getParam('class_id');
-        $lessonModel = new Application_Model_DbTable_Lesson(array('teacher_id'=> $this->_user->id));
+        $lessonModel = new Application_Model_DbTable_Lesson();
         $this->getResponse()->setHeader('Content-Type', 'application/json');
         $emptyLesson = array(array(
             'id' => "",
             'name' => 'Lütfen Dersi Seçiniz'
         ));
-        $getLessons = $lessonModel->getJsonLessons($department_id, $class_id, $this->_user->id)->toArray();
+        $getLessons = $lessonModel->getJsonLessons($department_id, $class_id)->toArray();
         echo Zend_Json::encode(array_merge($emptyLesson,$getLessons));
     }
 

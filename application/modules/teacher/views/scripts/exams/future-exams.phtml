@@ -22,37 +22,34 @@
                             <table class="table table-striped table-bordered bootstrap-datatable datatable">
                               <thead>
                                       <tr>
+                                              <th>Sınav Başlangıcı</th>
+                                              <th>Sınav Bitişi</th>
                                               <th>Bölüm</th>
                                               <th>Sınıf</th>
                                               <th>Ders</th>
-                                              <th>Sınav Başlangıcı</th>
-                                              <th>Sınav Bitişi</th>
                                               <th></th>
                                       </tr>
                               </thead>   
                               <tbody>
                                   <?php if(count($this->exams)){
-                                    $departmentModel = new Application_Model_DbTable_Department();
-                                    $lessonModel = new Application_Model_DbTable_Lesson();
-                                    $classModel = new Application_Model_DbTable_Class();
                                     foreach ($this->exams as $exam) {
                                   ?>
 
 
                                     <tr>
-                                            <td class="center"><?php echo $departmentModel->getByFilter(array('id' => $exam->department_id))->name; ?></td>
-                                            <td class="center"><?php echo $classModel->getByFilter(array('id' => $exam->class_id))->name; ?></td>
-                                            <td class="center"><?php echo $lessonModel->getByFilter(array('id' => $exam->lesson_id))->name; ?></td>
-                                            <td class="center"><?php echo $exam->start_time; ?></td>
-                                            <td class="center"><?php echo $exam->finish_time; ?></td>
+                                            <td class="center"><?php echo $exam->exam_start_time ?></td>
+                                            <td class="center"><?php echo $exam->exam_finish_time ?></td>
+                                            <td class="center"><?php echo $exam->department_name ?></td>
+                                            <td class="center"><?php echo $exam->class_name; ?></td>
+                                            <td class="center"><?php echo $exam->lesson_name; ?></td>
                                             <td class="center">
                                                 
                                                     
-                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/exams/show/'.$exam->id);?>">
+                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/exams/show/'.$exam->exam_id);?>">
                                                             <i class="icon-zoom-in icon-white"></i>  
                                                             Görüntüle                                            
                                                     </a>
-                                                    <a class="btn btn-info" href="<?php echo $this->baseUrl('/teacher/exams/edit/'.$exam->id);?>">
+                                                    <a class="btn btn-info" href="<?php echo $this->baseUrl('/teacher/exams/edit/'.$exam->exam_id);?>">
                                                             <i class="icon-edit icon-white"></i>  
                                                             Düzenle                                            
                                                     </a>
@@ -61,12 +58,12 @@
                                                             Sil
                                                     </a>
                                                     
-                                                    <a class="btn btn-danger" href="<?php echo $this->baseUrl('/teacher/exams/pdf-download/'.$exam->id);?>">
+                                                    <a class="btn btn-danger" href="<?php echo $this->baseUrl('/teacher/exams/pdf-download/'.$exam->exam_id);?>">
                                                             <i class="icon-trash icon-white"></i> 
                                                             Pdf İndir
                                                     </a>
-                                                    <?php if($exam->type == "online"){ ?>
-                                                         <a class="btn btn-primary" href="<?php echo $this->baseUrl('/teacher/exams/questions/'.$exam->id);?>">
+                                                    <?php if($exam->exam_type == "online"){ ?>
+                                                         <a class="btn btn-primary" href="<?php echo $this->baseUrl('/teacher/exams/questions/'.$exam->exam_id);?>">
                                                             <i class="icon-zoom-in icon-white"></i>  
                                                             Sorular                                            
                                                          </a>    

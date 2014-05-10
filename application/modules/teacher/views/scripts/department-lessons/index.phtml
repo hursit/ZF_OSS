@@ -31,45 +31,30 @@
                                       </tr>
                               </thead>   
                               <tbody>
-                                  <?php if(count($this->lessons)){
-                                      $memberModel = new Application_Model_DbTable_Members();
-                                      $classModel = new Application_Model_DbTable_Class();
-                                      foreach ($this->lessons as $lesson) {
-                                            $member = $memberModel->getByFilter(array('id' => $lesson->teacher_id));
-                                            $class = $classModel->getByFilter(array('id' => $lesson->class_id));
+                                  <?php if(count($this->lessonsWithTeacher)){
+                                      foreach ($this->lessonsWithTeacher as $lesson) {
                                        ?>
                                     
                                     <tr>
-                                            <td class="center"><?php echo $lesson->name;?></td>
-                                            <td class="center"><?php echo ucfirst($class->name);?></td>
+                                            <td class="center"><?php echo $lesson->les_name;?></td>
+                                            <td class="center"><?php echo ucfirst($lesson->class_name);?></td>
+                                            <td class="center"><?php echo $lesson->teac_name." ".$lesson->teac_surname?></td>
                                             <td class="center">
-                                            <?php 
-                                                if(count($member)){
-                                                    echo ucfirst($member->name) . " " . strtoupper($member['surname']);
-                                                }
-                                                else{
-                                                    echo "Öğretmen Ataması Yapılmadı";
-                                                }
-                                            ?>
-                                            
-                                            
-                                            </td>
-                                            <td class="center">
-                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/advisor/lesson/lesson-students/'.$lesson['id']);?>">
+                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/lesson/lesson-students/'.$lesson->les_id);?>">
                                                             <i class="icon-zoom-in icon-white"></i>  
                                                             Alan Öğrenciler                                            
                                                     </a>
-                                                    <a class="btn btn-info" href="<?php echo $this->baseUrl('/advisor/department-lessons/edit/'.$lesson['id']);?>">
+                                                    <a class="btn btn-info" href="<?php echo $this->baseUrl('/teacher/department-lessons/edit/'.$lesson->les_id);?>">
                                                             <i class="icon-edit icon-white"></i>  
                                                             Düzenle                                            
                                                     </a>
-                                                <?php if($lesson['is_deleted'] == 'false'){ ?>
-                                                    <a class="btn btn-danger" href="<?php echo $this->baseUrl().'/advisor/department-lessons/un-publish/' . $lesson['id'];?>">
+                                                <?php if($lesson->les_is_deleted == 'false'){ ?>
+                                                    <a class="btn btn-danger" href="<?php echo $this->baseUrl().'/teacher/department-lessons/un-publish/' . $lesson->les_id;?>">
                                                             <i class="icon-trash icon-white"></i> 
                                                             Yayından Kaldır
                                                     </a>
                                                 <?php } else { ?>
-                                                    <a class="btn btn-warning" href="<?php echo $this->baseUrl().'advisor/department-lessons/publish/' . $lesson['id'];?>">
+                                                    <a class="btn btn-warning" href="<?php echo $this->baseUrl().'/teacher/department-lessons/publish/' . $lesson->les_id;?>">
                                                             <i class="icon-trash icon-white"></i> 
                                                             Yayınla
                                                     </a>
@@ -77,7 +62,39 @@
                                             </td>
                                     </tr>
                                   <?php  }};?>
-                              </tbody>
+                      
+                                <?php if(count($this->lessonsWithNoTeacher)){
+                                      foreach ($this->lessonsWithNoTeacher as $lesson) {
+                                       ?>
+                                    
+                                    <tr>
+                                            <td class="center"><?php echo $lesson->les_name;?></td>
+                                            <td class="center"><?php echo ucfirst($lesson->class_name);?></td>
+                                            <td class="center">Atanmadı</td>
+                                            <td class="center">
+                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/lesson/lesson-students/'.$lesson->les_id);?>">
+                                                            <i class="icon-zoom-in icon-white"></i>  
+                                                            Alan Öğrenciler                                            
+                                                    </a>
+                                                    <a class="btn btn-info" href="<?php echo $this->baseUrl('/teacher/department-lessons/edit/'.$lesson->les_id);?>">
+                                                            <i class="icon-edit icon-white"></i>  
+                                                            Düzenle                                            
+                                                    </a>
+                                                <?php if($lesson->les_is_deleted == 'false'){ ?>
+                                                    <a class="btn btn-danger" href="<?php echo $this->baseUrl().'/teacher/department-lessons/un-publish/' . $lesson->les_id;?>">
+                                                            <i class="icon-trash icon-white"></i> 
+                                                            Yayından Kaldır
+                                                    </a>
+                                                <?php } else { ?>
+                                                    <a class="btn btn-warning" href="<?php echo $this->baseUrl().'/teacher/department-lessons/publish/' . $lesson->les_id;?>">
+                                                            <i class="icon-trash icon-white"></i> 
+                                                            Yayınla
+                                                    </a>
+                                                <?php }  ?>
+                                            </td>
+                                    </tr>
+                                  <?php  }};?>
+                        </tbody>
                       </table>            
                     </div>
             </div><!--/span-->

@@ -21,12 +21,29 @@
                             </div>
                     </div>
                 <div class="box-content">
-                              <fieldset>
-                                  Baslık : <?php echo $this->announcement->title; ?> <br>
-                                  Detay : <?php echo $this->announcement->detail; ?> <br>
-                                  Tarih : <?php echo $this->announcement->time; ?> <br>
-                                  /// Doldurulacak
+                              <fieldset style='text-align: center' class="well">
+                                  <h1>
+            <?php $departmentModel = new Application_Model_DbTable_Department();
+                echo $departmentModel->getByFilter(array('id' =>  $this->announcement->department_id))->name ;
+                echo "<br>";
+                if($this->announcement->class_id){
+                    $classModel = new Application_Model_DbTable_Class();
+                    echo $classModel->getByFilter(array('id' =>  $this->announcement->class_id))->name ;
+                    echo "<br>";
+                }
+                if($this->announcement->lesson_id){
+                    $lessonModel = new Application_Model_DbTable_Lesson();
+                    echo $lessonModel->getByFilter(array('id' =>  $this->announcement->lesson_id))->name ;
+                    echo " Dersi <br><br></h1>";
+                }
+                echo "<h2>".$this->announcement->title."</h2><br>"; ?>
                               </fieldset>
+                    <fieldset class="well">
+                        <?php echo $this->announcement->detail;?>
+                        <hr>
+                        <?php echo $this->announcement->time;?>
+                        
+                    </fieldset>
 
                     </div>
             </div><!--/span-->

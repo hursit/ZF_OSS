@@ -100,20 +100,27 @@ class Application_Model_DbTable_Lesson extends Zend_Db_Table_Abstract
         $filter->from($this->_name . ' AS l', array('l.id as les_id','l.name as les_name','l.is_deleted as les_is_deleted'))
                 ->where('l.department_id = ?', $department_id)
                 ->where('l.teacher_id = ?', 0)
-                ->join('members AS m', 'l.teacher_id=m.id', array('m.name as teac_name', 'm.surname as teac_surname'))
                 ->join('class AS c','l.class_id=c.id',array('c.name as class_name'));
         return $this->fetchAll($filter);
     }
-    
-    
     
     public function getTeacherLessons($teacher_id){
         $filter = $this->select();
         $filter->setIntegrityCheck(false);
         $filter->from($this->_name . ' AS l', array('l.id as les_id','l.name as les_name','l.is_deleted as les_is_deleted'))
-                ->where('ls.teacher_id = ?', $teacher_id)
-                ->join('class AS c','l.class_id=c.id',array('c.name as class_name'));
+                ->where('l.teacher_id = ?', $teacher_id)
+                ->join('class AS c','l.class_id=c.id',array('c.name as class_name'))
+                ->join('department AS d','l.department_id=d.id',array('d.name as department_name'));
         return $this->fetchAll($filter);
     }
     
+    public function getLesson($lesson_id){
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS l', array('l.id as les_id','l.name as les_name'))
+                ->where('l.id = ?', $lesson_id)
+                ->join('class AS c','l.class_id=c.id',array('c.name as class_name'))
+                ->join('department AS d','l.department_id=d.id',array('d.name as department_name'));
+        return $this->fetchRow($filter);
+    }
 }

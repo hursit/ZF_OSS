@@ -30,24 +30,19 @@ class Default_Form_Student extends Zend_Form
                 ->setAttrib('class', 'input-large')
                 ->addValidator($empty_validate);
         
+        $departmentModel = new Application_Model_DbTable_Department();
         $departmentId = new Zend_Form_Element_Select('department_id');
         $departmentId->setRequired(true)
                 ->setAttrib('class', 'input-block-level')
                 ->addValidator($empty_validate)
                 ->setAttrib('class', '')
-                ->addMultiOptions(array('1' => 'Bilgisayar Muhendisligi',
-                                '2' => 'Elektrik Elektronik Muhendisligi',
-                                '3' => 'Fizik',
-                                '4' => 'Kimya'));
-
+                ->addMultiOptions($departmentModel->getAllAsPairs());
+     
         
-        
+        $classModel = new Application_Model_DbTable_Class();
         $class = new Zend_Form_Element_Select('class_id');   
         $class->setAttrib('class', '')
-                ->addMultiOptions(array('1' => '1',
-                                    '2' => '2',
-                                    '3' => '3',
-                                    '4' => '4'));
+                ->addMultiOptions($classModel->getAllAsPairs());
         
         $gender = new Zend_Form_Element_Select('gender'); 
         $gender->setAttrib('class', '')

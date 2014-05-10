@@ -11,7 +11,7 @@
     <div class="row-fluid sortable">		
             <div class="box span12">
                     <div class="box-header well" data-original-title>
-                            <h2><i class="icon-user"></i> Duyurular</h2>
+                            <h2><i class="icon-user"></i>Onay Bekleyen Öğrenciler</h2>
                             <div class="box-icon">
                                     <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
                                     <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -36,22 +36,18 @@
 
 
                                     <tr>
-                                            <td class="center"><?php echo $student['name']?></td>
-                                            <td class="center"><?php echo $student['surname']?></td>
-                                            <td class="center"><?php echo $student['studentNumber']?></td>
-                                            <td class="center"><?php echo $student['department_id']?></td>
-                                            <td class="center"><?php echo $student['class_id']?></td>
-                                            <td class="center"><?php echo $student['time']?></td>
+                                            <td class="center"><?php echo $student->student_name ?></td>
+                                            <td class="center"><?php echo $student->student_surname?></td>
+                                            <td class="center"><?php echo $student->student_number?></td>
+                                            <td class="center"><?php echo $student->department_name ?></td>
+                                            <td class="center"><?php echo $student->class_name ?></td>
+                                            <td class="center"><?php echo $student->student_created?></td>
                                             <td class="center">
-                                                    <a class="btn btn-info" href="">
-                                                            <i class="icon-zoom-in icon-white"></i>  
-                                                            Görüntüle                                            
-                                                    </a>
-                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/department-students/confirmed-student/'.$student['id']);?>">
+                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/department-students/confirmed-student/'.$student->student_id);?>">
                                                             <i class="icon-edit icon-white"></i>  
                                                             Onayla                                  
                                                     </a>
-                                                    <a class="btn btn-danger" href="<?php echo $this->baseUrl('/teacher/department-students/delete-student/'.$student['id']);?>">
+                                                    <a class="btn btn-danger" href="<?php echo $this->baseUrl('/teacher/department-students/delete-student/'.$student->student_id) ?>">
                                                             <i class="icon-trash icon-white"></i> 
                                                             Sil
                                                     </a>

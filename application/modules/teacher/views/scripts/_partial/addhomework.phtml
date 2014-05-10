@@ -9,16 +9,6 @@
     <input type="hidden" name="department_id" value="<?php echo $this->lesson->department_id ;?>">
     <input type="hidden" name="class_id" value="<?php echo $this->lesson->class_id ?>">
     <fieldset>
-        <label for="title">Başlık</label>
-        <input type="text" name="title" id="title" placeHolder="Başlığı giriniz" required>
-    </fieldset>
-    
-    <fieldset>
-        <label for="detail">Detay</label>
-        <textarea name="detail" class="cleditor" id="detail" placeHolder="Detayı giriniz" required></textarea>
-    </fieldset>
-   
-    <fieldset>
         <label for="finish">Bitiş Zamanı</label>
         <div id="datetimepicker" class="input-append date">
             <input type="text" name="finish_time"></input>
@@ -26,6 +16,15 @@
               <i data-time-icon="icon-time" data-date-icon="icon-calendar" required></i>
             </span>
         </div>
+    </fieldset>
+    <fieldset>
+        <label for="title">Başlık</label>
+        <input type="text" name="title" id="title" placeHolder="Başlığı giriniz" required>
+    </fieldset>
+    
+    <fieldset>
+        <label for="detail">Detay</label>
+        <textarea name="detail" class="cleditor" id="detail" placeHolder="Detayı giriniz" required></textarea>
     </fieldset>
     <input type="submit" class="btn btn-primary" value="kaydet">
 </form>

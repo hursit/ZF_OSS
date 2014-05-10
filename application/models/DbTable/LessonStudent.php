@@ -99,7 +99,7 @@ class Application_Model_DbTable_LessonStudent extends Zend_Db_Table_Abstract
         $filter->setIntegrityCheck(false);
         $filter->from($this->_name . ' AS ls')
                 ->where('ls.lesson_id = ?', $lesson_id)
-                ->join('members AS m', 'ls.student_id=m.id', array('m.id as student_id','m.name as student_name', 'm.surname as student_surname'))
+                ->join('members AS m', 'ls.student_id=m.id', array('m.id as student_id','m.name as student_name','m.studentNumber as student_number', 'm.surname as student_surname'))
                 ->join('lesson AS l', 'ls.lesson_id=l.id')
                 ->join('class AS c','l.class_id=c.id',array('c.name as class_name'));
         return $this->fetchAll($filter);
@@ -111,6 +111,20 @@ class Application_Model_DbTable_LessonStudent extends Zend_Db_Table_Abstract
                 ->where('ls.student_id = ?', $student_id)
                 ->join('lesson AS l', 'ls.lesson_id=l.id',array('l.name as lesson_name'))
                 ->join('class AS c','l.class_id=c.id',array('c.name as class_name'));
+        return $this->fetchAll($filter);
+    }
+    ///for teacher module. Teacher's waiting students
+    public function getWaitingStudents($teacher_id){
+        $teacherLessons = $this->select()->setIntegrityCheck(false)->from('lesson', array('id'))->where('teacher_id = '.$teacher_id);
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS ls',array('ls.id as ls_id','ls.student_id as student_id','ls.lesson_id as lesson_id'))
+                ->where('ls.lesson_id in ?',$teacherLessons)
+                ->where('ls.confirmation = ?', 'false')
+                ->join('members AS m', 'ls.student_id=m.id',array('m.name as student_name','m.surname as student_surname'))
+                ->join('lesson AS l', 'ls.lesson_id=l.id',array('l.name as lesson_name'))
+                ->join('department AS d', 'l.department_id=d.id',array('d.name as department_name'))
+                ->join('class AS c', 'l.class_id=c.id',array('c.name as class_name'));
         return $this->fetchAll($filter);
     }
 }

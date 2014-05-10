@@ -21,10 +21,18 @@
                             </div>
                     </div>
                 <div class="box-content">
-                              <fieldset>
-                                  Baslık : <?php echo $this->homework->title; ?> <br>
-                                  Bitiş : <?php echo $this->homework->finish_time; ?> <br>
-                                  Sorumlu Öğrenciler : /// Doldurulacak<br>
+                              <fieldset class="well">
+                                  Son Tarih : <?php echo $this->homework->hw_finish_time; ?> <br>
+                                  <h3 class="well" style="text-align: center">
+                                      <?php echo $this->homework->department_name; ?><br>
+                                      <?php echo $this->homework->class_name; ?><br>
+                                      <?php echo $this->homework->lesson_name; ?> Dersi <br>
+                                      Öğr. Görevlisi : <?php echo $this->homework->teacher_name." ". $this->homework->teacher_surname; ?>  <hr>
+                                      <?php echo $this->homework->hw_title; ?>
+                                  </h3>
+                                  <div class="well">
+                                      <?php echo $this->homework->hw_detail;?>
+                                  </div>
                               </fieldset>
 
                     </div>

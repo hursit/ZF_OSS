@@ -13,7 +13,11 @@
     <body>
     
     
-        <h1 style='text-align: center'><?php echo $this->lesson->name."<br>"; ?></h1>
+        <h1 style='text-align: center'>
+            <?php echo $this->lesson->department_name; ?> Bölümü <br>
+            <?php echo $this->lesson->class_name; ?><br>
+            <?php echo $this->lesson->les_name; ?> Dersi <br>
+        </h1>
 <br><br>
         <h2>Öğrenci Listesi</h2>
         <br><br>
@@ -23,18 +27,16 @@
                     <td style="font-weight:bold">İsim</td>
                     <td style="font-weight:bold">Soyisim</td>
                 </tr>
-                    <?php if(count($this->student_ids)){
-                        $memberModel = new Application_Model_DbTable_Members();
-                        foreach ($this->student_ids as $student_id) { 
-                            $member = $memberModel->getByFilter(array('id' => $student_id->student_id));
+                    <?php if(count($this->students)){
+                        foreach ($this->students as $student) { 
                      ?>
                             <tr>
-                                <td><?php echo $member->studentNumber;?></td>
-                                <td><?php echo $member->name;?></td>
-                                <td><?php echo $member->surname;?></td>
+                                <td><?php echo $student->student_number;?></td>
+                                <td><?php echo $student->student_name;?></td>
+                                <td><?php echo $student->student_surname;?></td>
                             </tr>
                     <?php }
-                        }; 
+                        }
                     ?>
             </table>
     </body>

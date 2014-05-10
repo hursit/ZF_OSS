@@ -10,6 +10,8 @@ class Teacher_StudentController extends Zend_Controller_Action
         $auth = Zend_Auth::getInstance();
         $this->_user = $auth->getIdentity();
         $this->view->user = $this->_user;
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+        $this->view->messages = $this->_helper->flashMessenger->getMessages();
     }
 
     public function indexAction()
@@ -24,7 +26,7 @@ class Teacher_StudentController extends Zend_Controller_Action
 
     public function waitingLessonStudentsAction()
     {
-        $model = new Application_Model_DbTable_Members();
+        $model = new Application_Model_DbTable_LessonStudent();
         $this->view->waitingStudents = $model->getWaitingStudents($this->_user->id);
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
        
@@ -39,7 +41,9 @@ class Teacher_StudentController extends Zend_Controller_Action
     {
         $student_id = $this->_getParam('id');
         $memberModel = new Application_Model_DbTable_Members();
-        $this->view->student = $memberModel->getByFilter(array('id' => $student_id));
+        $lessonStudentModel = new Application_Model_DbTable_LessonStudent();
+        $this->view->student = $memberModel->getStudent($student_id);
+        $this->view->lessons = $lessonStudentModel->getStudentLessons($student_id);
     }
 }
 

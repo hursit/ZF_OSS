@@ -46,43 +46,9 @@ class Application_Model_DbTable_Homework extends Zend_Db_Table_Abstract
         }
     }
     
-    //public function getTeacherHomeworks($teacher_id){
-    //    $select = $this->select();
-    //    $select->where('teacher_id = ?', $teacher_id);
-    //    return $this->fetchAll($select);
-    //}
-    //public function getLessonHomeworks($lesson_id,$teacher_id){
-    //    $select = $this->select();
-    //    $select->where('lesson_id = ?', $lesson_id);
-    //    $select->where('teacher_id = ?', $teacher_id);
-    //    return $this->fetchAll($select);
-    //}
-    //public function getLessonHomeworksForStudent($lesson_id){
-    //    $select = $this->select();
-    //    $select->where('lesson_id = ?', $lesson_id);
-    //    return $this->fetchAll($select);
-    //}
-    
-    
-    //Neden hata veriyor. Bulunacak
-    //$this->update($data,$this->_primary.' = '.(int)$id);
     public function edit($id,$data){
         $this->update($data,'id = '.(int)$id);
     }
-    
-    //Öğrencinin aldığı dersleri biliyoruz. Oradan bulacağız...
-    /*public function getStudentHomeworks($student_id){
-        $lessonStudentModel = new Application_Model_DbTable_LessonStudent();
-        $lessons = $lessonStudentModel->getAll(array('student_id' => $student_id));
-        $homeworks = array();
-        foreach ($lessons as $lesson) {
-            $lessonHomeworks = $this->getAll(array('lesson_id' => $lesson->lesson_id));
-            if(count($lessonHomeworks)){
-                array_push($homeworks,$lessonHomeworks);
-            }
-        }
-        return $homeworks;
-    }*/
     
     public function studentHomeworks($student_id,$limit=NULL){
         $lessonStudentModel = new Application_Model_DbTable_LessonStudent();
@@ -102,6 +68,26 @@ class Application_Model_DbTable_Homework extends Zend_Db_Table_Abstract
             }
             return $this->fetchAll($select);
         }        
+    }
+    
+    public function getHomework($homework_id){
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS hw',array('hw.id as hw_id','hw.title as hw_title','hw.detail as hw_detail','hw.finish_time as hw_finish_time'))
+                ->join('lesson AS l', 'hw.lesson_id=l.id', array('l.name as lesson_name'))
+                ->join('members AS m', 'l.teacher_id=m.id', array('m.name as teacher_name', 'm.surname as teacher_surname'))
+                ->join('department AS d', 'l.department_id=d.id', array('d.name as department_name'))
+                ->join('class AS c', 'l.class_id=c.id', array('c.name as class_name'));
+        return $this->fetchRow($filter);
+    }
+    public function getTeacherHomeworks($teacher_id){
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS hw',array('hw.id as hw_id','hw.title as hw_title','hw.finish_time as hw_finish_time'))
+                ->join('lesson AS l', 'hw.lesson_id=l.id', array('l.name as lesson_name'))
+                ->join('department AS d', 'l.department_id=d.id', array('d.name as department_name'))
+                ->join('class AS c', 'l.class_id=c.id', array('c.name as class_name'));
+        return $this->fetchAll($filter);
     }
 }
 

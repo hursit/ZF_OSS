@@ -12,10 +12,20 @@
     </style>
     <body>
     
-    
-    <h1 style='text-align: center'><?php echo $this->exam->title."<br>"; ?></h1>
-<span style="font-weight:bold;font-size:16px">Detaylar: </span><?php echo $this->exam->detail."<br>"; ?>
-<br><br>
+         <fieldset>
+                                  Başlangıç-Bitiş Tarihi : <?php echo $this->exam->exam_start_time." - ".$this->exam->exam_finish_time; ?> <br>
+                                  <h3 style="text-align: center">
+                                      <?php echo $this->exam->department_name; ?><br>
+                                      <?php echo $this->exam->class_name; ?><br>
+                                      <?php echo $this->exam->lesson_name; ?> Dersi <br>
+                                      Öğr. Görevlisi : <?php echo $this->exam->teacher_name." ". $this->exam->teacher_surname; ?>  <hr>
+                                      <?php echo $this->exam->exam_title; ?>
+                                  </h3>
+                                  <div>
+                                      <?php echo $this->exam->exam_detail;?>
+                                  </div>
+                              </fieldset>
+    <br><br>
 <center><h2>Sorular</h2></center>
 
             <?php if(count($this->questions)){

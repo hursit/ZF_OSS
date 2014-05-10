@@ -13,32 +13,43 @@ class Teacher_LessonController extends Zend_Controller_Action
         $this->_user = $auth->getIdentity();
         $this->view->user = $this->_user;
         $this->_lessonModel = new Application_Model_DbTable_Lesson();
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+        $this->view->messages = $this->_helper->flashMessenger->getMessages();
+    
     }
 
     public function indexAction()
     {
-        $this->view->lessons = $this->_lessonModel->getAll(
-                                                array('teacher_id' => $this->_user->id),
-                                                false);   
+        $this->view->lessons = $this->_lessonModel->getTeacherLessons($this->_user->id);   
     }
 
     public function lessonStudentsAction()
     {
         $lesson_id = $this->_getParam('id');
         $lessonStudentModel = new Application_Model_DbTable_LessonStudent();
-        $this->view->students = $lessonStudentModel->getAll(array('lesson_id' => $lesson_id));
+        $this->view->students = $lessonStudentModel->getLessonStudents($lesson_id);
     }
 
     public function unPublishAction()
     {
         $lesson_id = $this->_getParam('id');
         $this->_lessonModel->unPublish($lesson_id);
+        $this->_helper->flashMessenger("Ders yeni öğrenci kayıtlarına kapatıldı.");
+        $this->_redirector->gotoSimple('index',
+                                                   'lesson',
+                                                   'teacher');
+                
     }
 
     public function publishAction()
     {
         $lesson_id = $this->_getParam('id');
         $this->_lessonModel->Publish($lesson_id);
+        $this->_helper->flashMessenger("Ders yeni öğrenci kayıtlarına açıldı");
+        $this->_redirector->gotoSimple('index',
+                                        'lesson',
+                                        'teacher');
+                
     }
 
     public function confirmedStudentLessonApplicationAction()
@@ -79,18 +90,19 @@ class Teacher_LessonController extends Zend_Controller_Action
     public function studentListAction()
     {
         $lesson_id = $this->_getParam('id');
-        $lesson = $this->_lessonModel->getByFilter(array('id' => $lesson_id));
+        $lesson = $this->_lessonModel->getLesson($lesson_id);
+        
         $lessonStudentModel = new Application_Model_DbTable_LessonStudent();
-        $student_ids = $lessonStudentModel->getAll(array('lesson_id' => $lesson_id));
+        $students = $lessonStudentModel->getLessonStudents($lesson_id);
             
         $this->_helper->layout->disableLayout();
         
         //pdf writer kütüphanemiz
         require_once APPLICATION_PATH.'/../library/Mylibrary/mpdf/mpdf.php';
         $pdfWriter = new mPDF();
-        $page = $this->view->partial('lesson/student-list.phtml', 'teacher', array('lesson' => $lesson, 'student_ids' => $student_ids));
+        $page = $this->view->partial('lesson/student-list.phtml', 'teacher', array('lesson' => $lesson, 'students' => $students));
         $pdfWriter->WriteHTML($page);
-        $pdfWriter->Output($lesson->name."_dersi_ogrenci_listesi.pdf","D"); 
+        $pdfWriter->Output($lesson->les_name."_dersi_ogrenci_listesi.pdf","D"); 
         exit;
     }
 
