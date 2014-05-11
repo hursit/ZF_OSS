@@ -1,3 +1,6 @@
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+
 <!--- datepicker css   -->
 <link rel="stylesheet" type="text/css" media="screen" href="/datetimepicker/bootstrap-datetimepicker.min.css">
 
@@ -10,7 +13,7 @@
     <input type="hidden" name="class_id" value="<?php echo $this->lesson->class_id ?>">
     <fieldset>
         <label for="finish">Bitiş Zamanı</label>
-        <div id="datetimepicker" class="input-append date">
+        <div id="datetimepicker">
             <input type="text" name="finish_time"></input>
             <span class="add-on">
               <i data-time-icon="icon-time" data-date-icon="icon-calendar" required></i>
@@ -24,7 +27,7 @@
     
     <fieldset>
         <label for="detail">Detay</label>
-        <textarea name="detail" class="cleditor" id="detail" placeHolder="Detayı giriniz" required></textarea>
+        <textarea name="detail" id="detail" placeHolder="Detayı giriniz" required></textarea>
     </fieldset>
     <input type="submit" class="btn btn-primary" value="kaydet">
 </form>

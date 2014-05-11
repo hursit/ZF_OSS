@@ -1,3 +1,5 @@
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 <!--- datepicker css   -->
 <link rel="stylesheet" type="text/css" media="screen" href="/datetimepicker/bootstrap-datetimepicker.min.css">
 
@@ -9,7 +11,7 @@
     
     <fieldset>
         <label for="start_time">Sınav Başlangıcı</label>
-        <div class="datetimepicker" class="input-append date">
+        <div class="datetimepicker">
             <input type="text" name="start_time" value="<?php echo $this->exam->start_time;?>" ></input>
             <span class="add-on">
               <i data-time-icon="icon-time" data-date-icon="icon-calendar" required></i>
@@ -19,7 +21,7 @@
     
     <fieldset>
         <label for="start_time">Sınav Bitişi</label>
-        <div class="datetimepicker" class="input-append date">
+        <div class="datetimepicker">
             <input type="text" name="finish_time" value="<?php echo $this->exam->start_time;?>" ></input>
             <span class="add-on">
               <i data-time-icon="icon-time" data-date-icon="icon-calendar" required></i>
@@ -29,8 +31,8 @@
     
     <fieldset>
         <label for="detail">Detay</label>
-        <textarea name="detail" id="detail" class="cleditor" placeHolder="Detayı giriniz" required>
-             <?php echo $this->exam->title;?> 
+        <textarea name="detail" id="detail" class="span10" style="height:200px" placeHolder="Detayı giriniz">
+             <?php echo $this->exam->detail;?> 
         </textarea>
     </fieldset>
    

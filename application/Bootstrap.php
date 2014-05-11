@@ -128,7 +128,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 'jquery.chosen.min.js',
                 'jquery.uniform.min.js',
                 'jquery.colorbox.min.js',
-                'jquery.cleditor.min.js',
+                'nicEdit.js',
                 'jquery.noty.js',
                 'jquery.elfinder.min.js',
                 'jquery.raty.min.js',

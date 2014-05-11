@@ -115,6 +115,7 @@ class Application_Model_DbTable_Exam extends Zend_Db_Table_Abstract
         $filter = $this->select();
         $filter->setIntegrityCheck(false);
         $filter->from($this->_name . ' AS e',array('e.id as exam_id','e.title as exam_title','e.detail as exam_detail','e.start_time as exam_start_time','e.finish_time as exam_finish_time'))
+                ->where('e.id = ?', $exam_id)
                 ->join('members AS m', 'e.teacher_id=m.id', array('m.name as teacher_name', 'm.surname as teacher_surname'))
                 ->join('department AS d', 'e.department_id=d.id', array('d.name as department_name'))
                 ->join('class AS c', 'e.class_id=c.id', array('c.name as class_name'))
