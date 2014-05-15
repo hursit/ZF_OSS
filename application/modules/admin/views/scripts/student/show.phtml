@@ -38,16 +38,32 @@
                                       <tr>
                                               <th>Ders</th>
                                               <th>Sınıf</th>
+                                              <th>Bölüm</th>
+                                              <th>Öğretim Görevlisi</th>
                                       </tr>
                               </thead>   
                               <tbody>
     
-<?php if(count($this->studentLessons)){
-            foreach ($this->studentLessons as $lesson) {
+<?php if(count($this->studentLessonsWithTeacher)){
+            foreach ($this->studentLessonsWithTeacher as $lesson) {
 ?>
             <tr>
                 <td><?php echo $lesson->lesson_name;?></td>
                 <td><?php echo $lesson->class_name;?></td>
+                <td><?php echo $lesson->department_name;?></td>
+                <td><?php echo $lesson->teacher_name." ".$lesson->teacher_surname;?></td>
+<?php                                    
+            }
+       }
+?>
+<?php if(count($this->studentLessonsWithNoTeacher)){
+            foreach ($this->studentLessonsWithNoTeacher as $lesson) {
+?>
+            <tr>
+                <td><?php echo $lesson->lesson_name;?></td>
+                <td><?php echo $lesson->class_name;?></td>
+                <td><?php echo $lesson->department_name;?></td>
+                <td>Atanmadı</td>
 <?php                                    
             }
        }

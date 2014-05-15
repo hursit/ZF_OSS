@@ -5,7 +5,8 @@ class Default_IndexController extends Zend_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+        $this->view->messages = $this->_helper->flashMessenger->getMessages();
     }
 
     public function indexAction()
@@ -32,12 +33,22 @@ class Default_IndexController extends Zend_Controller_Action
             if($form->isValid($formData)){
                 $email = $form->getValue('email');
                 $password = $form->getValue('password');
+                
                 $authAdapter = $this->getStudentAuthAdapter();
                 $authAdapter->setIdentity($email)
                         ->setCredential($password);
                 $auth = Zend_Auth::getInstance();
                 $result = $auth->authenticate($authAdapter);
                 if($result->isValid()){
+                    $membersModel = new Application_Model_DbTable_Members();
+                    if(!$membersModel->userConfirmationStatus($email, $password)){
+                        Zend_Auth::getInstance()->clearIdentity();
+                        $this->_helper->flashMessenger("Üyeliğiniz henüz onaylanmadı");
+                        $this->_redirector->gotoSimple('login',
+                                                'index',
+                                                'default');
+                    }
+                    
                     $storage = $auth->getStorage();
                     $storage->write($authAdapter->getResultRowObject(
                             null,'password'));
@@ -53,8 +64,10 @@ class Default_IndexController extends Zend_Controller_Action
                     //print_r($identity);
                 }
                 else{
-                    //Duzeltilecek..
-                    echo "giris basarisiz";
+                    $this->_helper->flashMessenger("Lütfen e-mail adresinizi ve şifrenizi kontrol ediniz...");
+                    $this->_redirector->gotoSimple('login',
+                                                'index',
+                                                'default');
                 }       
             }
         } 
@@ -87,6 +100,9 @@ class Default_IndexController extends Zend_Controller_Action
                     unset($formData['retlyPassword']);
                     unset($formData['submit']);
                     $memberModel->add($formData);    
+                    $this->_redirector->gotoSimple('sign-up-success',
+                                                    'index',
+                                                    'default');
                 }                
             }
         }
@@ -110,6 +126,9 @@ class Default_IndexController extends Zend_Controller_Action
                     unset($formData['submit']);
                     $memberModel = new Application_Model_DbTable_Members();
                     $memberModel->add($formData);    
+                    $this->_redirector->gotoSimple('sign-up-success',
+                                                    'index',
+                                                    'default');
                 }                
             }
         }
@@ -130,7 +149,16 @@ class Default_IndexController extends Zend_Controller_Action
         }
         $this->redirect($this->getRequest()->getServer('HTTP_REFERER'));
     }
+
+    public function signUpSuccessAction()
+    {
+        
+    }
+
+
 }
+
+
 
 
 

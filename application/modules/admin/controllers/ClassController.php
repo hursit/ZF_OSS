@@ -27,6 +27,10 @@ class Admin_ClassController extends Zend_Controller_Action
                 $name = $form->getValue('name');
                 try {
                     $this->_classModel->add($name);
+                    $this->_helper->flashMessenger("Sınıf başarıyla eklendi");
+                    $this->_redirector->gotoSimple('index',
+                                                   'class',
+                                                   'admin');
                 } catch (Exception $exc) {
                     echo $exc->getTraceAsString();
                 }
@@ -45,6 +49,11 @@ class Admin_ClassController extends Zend_Controller_Action
                 try {
                     unset($formData['submit']);
                     $this->_classModel->edit($class_id,$formData);
+                    $this->_helper->flashMessenger("Sınıf başarıyla güncellendi");
+                    $this->_redirector->gotoSimple('index',
+                                                   'class',
+                                                   'admin');
+      
                 } catch (Exception $exc) {
                     echo $exc->getTraceAsString();
                 }
@@ -60,11 +69,21 @@ class Admin_ClassController extends Zend_Controller_Action
     {
         $class_id = $this->_getParam('id');
         $this->_classModel->unPublish($class_id);
+        $this->_helper->flashMessenger("Sınıf başarıyla kayıtlanmaya kapatıldı..");
+        $this->_redirector->gotoSimple('index',
+                                                   'class',
+                                                   'admin');
+      
     }
 
     public function publishAction()
     {
        $class_id = $this->_getParam('id');
        $this->_classModel->Publish($class_id);
+       $this->_helper->flashMessenger("Sınıf başarıyla kayıtlanmaya açıldı");
+       $this->_redirector->gotoSimple('index',
+                                     'class',
+                                    'admin');
+      
     }
 }

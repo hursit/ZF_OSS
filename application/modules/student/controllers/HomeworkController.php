@@ -18,7 +18,7 @@ class Student_HomeworkController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $this->view->homeworks = $this->_homeworkModel->studentHomeworks($this->_user->id);
+        $this->view->homeworks = $this->_homeworkModel->studentNextHomeworks($this->_user->id);
     }
 
     public function showAction()

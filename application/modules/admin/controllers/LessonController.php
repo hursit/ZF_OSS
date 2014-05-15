@@ -24,9 +24,9 @@ class Admin_LessonController extends Zend_Controller_Action
     public function addAction()
     {
         $department_id = $this->_getParam('id');
-        $form = new Admin_Form_Lesson();
+        $form = new Admin_Form_Lesson(array('department_id' => $department_id));
         $form->init();
-        $form->add(array('department_id' => $department_id));
+        $form->add();
         if($this->getRequest()->isPost()){
             $formData = $this->getRequest()->getPost();
             if($form->isValid($formData)){
@@ -41,7 +41,11 @@ class Admin_LessonController extends Zend_Controller_Action
                     $fileModel->createFolder("lessonExamsHomeworks/".$lesson_id, "homeworks");
                     //for lesson exams for download
                     $fileModel->createFolder("lessonExamsHomeworks/".$lesson_id, "exams");
-            
+                    
+                    $this->_helper->flashMessenger("Ders başarıyla eklendi");
+                    $this->_redirector->gotoSimple('index',
+                                                   'department',
+                                                   'admin');
                 } catch (Exception $exc) {
                     echo $exc->getTraceAsString();
                 }
@@ -62,6 +66,7 @@ class Admin_LessonController extends Zend_Controller_Action
                     unset($formData['department_id']);
                     unset($formData['submit']);
                     $this->_lessonModel->edit($lesson_id,$formData);
+        
                 } catch (Exception $exc) {
                     echo $exc->getTraceAsString();
                 }

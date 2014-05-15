@@ -33,6 +33,7 @@
                               <tbody>
                                   <?php if(count($this->lessonsWithTeacher)){
                                       foreach ($this->lessonsWithTeacher as $lesson) {
+                                          $lessonStudentModel = new Application_Model_DbTable_LessonStudent();
                                        ?>
                                     
                                     <tr>
@@ -40,10 +41,15 @@
                                             <td class="center"><?php echo ucfirst($lesson->class_name);?></td>
                                             <td class="center"><?php echo $lesson->teac_name." ".$lesson->teac_surname?></td>
                                             <td class="center">
-                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/lesson/lesson-students/'.$lesson->les_id);?>">
+                                                <?php 
+                                                $status = $lessonStudentModel->getByFilter(array('student_id' => $this->user->id,'lesson_id'=>$lesson->les_id));
+                                                if(!count($status)){ 
+                                                ?>
+                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/student/lesson/add-lesson-application/'.$lesson->les_id);?>">
                                                             <i class="icon-zoom-in icon-white"></i>  
                                                             Derse Kaydol                                            
                                                     </a>
+                                                <?php } ?>
                                             </td>
                                     </tr>
                                   <?php  }};?>

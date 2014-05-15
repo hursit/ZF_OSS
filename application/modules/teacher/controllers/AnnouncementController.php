@@ -111,7 +111,18 @@ class Teacher_AnnouncementController extends Zend_Controller_Action
         $pdfWriter->Output(substr($announcement->title, 0,20)."_duyuru.pdf","D");
         exit;
     }
-
+    public function deleteAction(){
+        $announcement_id = $this->_getParam('id');
+        try {
+            $this->_announcementModel->deleteAnnouncement($announcement_id);
+            $this->_helper->flashMessenger("Duyuru başarıyla silindi");
+            $this->_redirector->gotoSimple('index',
+                                           'announcement',
+                                           'teacher');
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
 
 }
 

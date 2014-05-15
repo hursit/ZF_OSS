@@ -13,7 +13,11 @@
     <body>
     
     
-        <h1 style='text-align: center'><?php echo $this->department->name." Bölümü"; ?>
+        <h1 style='text-align: center'>
+            <?php echo $this->lesson->department_name." Bölümü<br>"; ?>
+            <?php echo $this->lesson->class_name."<br>"; ?>
+            <?php echo $this->lesson->les_name." Dersi<br>"; ?>
+            Öğrenci Listesi
         </h1>
         <h3 style='text-align: center'><?php echo $this->class->name; ?>
         </h3>
@@ -25,19 +29,22 @@
                     <td style="font-weight:bold">Öğrenci No</td>
                     <td style="font-weight:bold">İsim</td>
                     <td style="font-weight:bold">Soyisim</td>
+                    <td style="font-weight:bold">Bölüm</td>
+                    <td style="font-weight:bold">Sınıf</td>
                 </tr>
-                    <?php if(count($this->student_ids)){
-                        $memberModel = new Application_Model_DbTable_Members();
-                        foreach ($this->students as $student) { 
-                     ?>
-                            <tr>
-                                <td><?php echo $student->studentNumber;?></td>
-                                <td><?php echo $student->name;?></td>
-                                <td><?php echo $student->surname;?></td>
-                            </tr>
-                    <?php }
-                        }; 
-                    ?>
+                             <?php if(count($this->students)){
+                                      foreach ($this->students as $student) {
+                                       ?>
+                                    
+                                    <tr>
+                                            <td><?php echo $student->student_number;?></td>
+                                            <td><?php echo $student->student_name;?></td>
+                                            <td><?php echo $student->student_surname;?></td>
+                                            <td class="center"><?php echo $student->department_name;?></td>
+                                            <td class="center"><?php echo $student->class_name;?></td>
+                                    </tr>
+                                  <?php  }};?>
+                     
             </table>
     </body>
 </html>

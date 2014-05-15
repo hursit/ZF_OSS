@@ -34,6 +34,13 @@ class Student_LessonController extends Zend_Controller_Action
     public function addLessonApplicationAction()
     {
         $lesson_id = $this->_getParam('id');
+        $status = $this->_lessonStudentModel->getByFilter(array('student_id' => $this->_user->id,'lesson_id'=> $lesson_id));
+        if(count($status)){
+            $this->_helper->flashMessenger("Derse daha önce başvurdunuz");
+            $this->_redirector->gotoSimple('department-lessons',
+                                        'lesson',
+                                        'student');
+        }
         $this->_lessonStudentModel->add($this->_user->id, $lesson_id);
         $this->_helper->flashMessenger("Ders kaydı danışman onayına gönderildi");
         $this->_redirector->gotoSimple('department-lessons',

@@ -221,8 +221,29 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         );
         $router->addRoute('studentLessonApplicationConfirmation', $route);
     }
-    public function _initDateTimePicker(){
-   
-    }  
+    /*public function _initCache(){
+        $frontendOptions = array(
+           'lifetime' => 1000000,
+           'automatic_serialization' => true,
+           'default_options' => array(
+               'cache_with_get_variables' => true,
+               'cache_with_post_variables' => true,
+               'cache_with_session_variables' => true,
+               'cache_with_files_variables' => true,
+               'cache_with_cookie_variables' => true,
+               'make_id_with_get_variables' => true,
+               'make_id_with_post_variables' => true,
+               'make_id_with_session_variables' => true,
+               'make_id_with_files_variables' => true,
+               'make_id_with_cookie_variables' => true,
+               'cache'=>true
+            ),
+        );
+        $backendOptions = array(
+            'cache_dir' => APPLICATION_PATH . '/servercache/'
+        );
+        $cache = Zend_Cache::factory('Page', 'File', $frontendOptions, $backendOptions);
+        $cache->start();
+    } */ 
 }
 

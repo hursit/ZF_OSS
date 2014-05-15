@@ -43,7 +43,8 @@ class Teacher_StudentController extends Zend_Controller_Action
         $memberModel = new Application_Model_DbTable_Members();
         $lessonStudentModel = new Application_Model_DbTable_LessonStudent();
         $this->view->student = $memberModel->getStudent($student_id);
-        $this->view->lessons = $lessonStudentModel->getStudentLessons($student_id);
+        $this->view->studentLessonsWithTeacher = $lessonStudentModel->getStudentLessonsWithTeacher($student_id);
+        $this->view->studentLessonsWithNoTeacher = $lessonStudentModel->getStudentLessonsWithNoTeacher($student_id);
     }
 }
 

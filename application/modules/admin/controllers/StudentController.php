@@ -50,7 +50,8 @@ class Admin_StudentController extends Zend_Controller_Action
     {
         $student_id = $this->_getParam('id');
         $lessonStudentModel = new Application_Model_DbTable_LessonStudent();
-        $this->view->studentLessons = $lessonStudentModel->getStudentLessons($student_id);
+        $this->view->studentLessonsWithTeacher = $lessonStudentModel->getStudentLessonsWithTeacher($student_id);
+        $this->view->studentLessonsWithNoTeacher = $lessonStudentModel->getStudentLessonsWithNoTeacher($student_id);
         $this->view->student = $this->_memberModel->getStudent($student_id);
     }
 
@@ -77,25 +78,19 @@ class Admin_StudentController extends Zend_Controller_Action
     {
         require_once APPLICATION_PATH.'/../library/Mylibrary/mpdf/mpdf.php';
         
-        $requestUrl = explode('-', $this->_getParam('id'));
-        $class_id = $requestUrl[1];
-        $department_id = $requestUrl[0];
+        $lesson_id = $this->_getParam('id');
         
-        $classModel = new Application_Model_DbTable_Class();
-        $class = $classModel->getByFilter(array('id' => $class_id));
+        $lessonModel = new Application_Model_DbTable_Lesson();
+        $lessonStudentModel = new Application_Model_DbTable_LessonStudent();
         
-        $departmentModel = new Application_Model_DbTable_Department();
-        $department = $departmentModel->getByFilter(array('id' => $department_id));
-        
-        $memberModel = new Application_Model_DbTable_Members();
-        $students = $memberModel->getAll(array('class_id' => $class_id,'department_id' => $department_id));
-        
+        $lesson = $lessonModel->getLesson($lesson_id);
+        $students = $lessonStudentModel->getLessonStudents($lesson_id);
         $this->_helper->layout->disableLayout();
         //pdf writer kütüphanemiz
         $pdfWriter = new mPDF();
-        $page = $this->view->partial('_partial/student-list.phtml', 'admin', array('class' => $class, 'students' => $students,'department' => $department));
+        $page = $this->view->partial('_partial/student-list.phtml', 'admin', array('lesson' => $lesson, 'students' => $students,'department' => $department));
         $pdfWriter->WriteHTML($page);
-        $pdfWriter->Output($department->name."_bolumu_".$class->name."_ogrenci_listesi.pdf","D"); 
+        $pdfWriter->Output($lesson->department_name."_bolumu_".$lesson->les_name."_dersi_ogrenci_listesi.pdf","D"); 
         exit;
     }
 

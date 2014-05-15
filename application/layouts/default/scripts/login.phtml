@@ -24,25 +24,35 @@
 </head>
 
 <body>
-		<div class="container-fluid">
-		<div style="margin-left:30%" class="row-fluid">
-		
-			<div class="row-fluid">
-				<div class="span12 center login-header">
-					<h2><?php echo $this->translate('welcome to system');?></h2>
-				</div><!--/span-->
-			</div><!--/row-->
-			
-			<div class="row-fluid">
-				<div class="well span5 center login-box">
-					<div class="alert alert-info">
-						<?php echo $this->translate('please write email and password');?>
-					</div>
-					<?php echo $this->form; ?>
-				</div><!--/span-->
-			</div><!--/row-->
-				</div><!--/fluid-row-->
-		
+        <div class="container-fluid">
+            <div style="margin-left:30%" class="row-fluid">
+
+                    <div class="row-fluid">
+                            <div class="span12 center login-header">
+                                    <h2><?php echo $this->translate('welcome to system');?></h2>
+                            </div><!--/span-->
+                    </div><!--/row-->
+
+                    <div class="row-fluid">
+                            <div class="well span5 center login-box">
+                                    <?php
+                                        if(count($this->messages)){ ?> 
+                                           <?php foreach ($this->messages as $message) { ?>
+                                                <div class="alert alert-error">
+                                                  <a href="#" class="alert-link">
+                                                                    <?php echo $message; ?>
+                                                  </a>
+                                                </div>
+                                          <?php } ?>
+                                    <?php } ?>
+                                    <div class="alert alert-info">
+                                       <?php echo $this->translate('please write email and password');?>
+                                    </div>
+                                    <?php echo $this->form; ?>
+                            </div><!--/span-->
+                    </div><!--/row-->
+            </div><!--/fluid-row-->
+
 	</div><!--/.fluid-container-->
 
 	<!-- external javascript

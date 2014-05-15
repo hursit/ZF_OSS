@@ -21,7 +21,7 @@ class Teacher_Form_Announcement extends Zend_Form
         $detail = new Zend_Form_Element_Textarea('detail');
         $detail->setRequired(true)
                 ->setLabel('Duyuru')
-                ->setAttrib('class', 'control-group  controls cleditor');
+                ->setAttrib('class', 'control-group span10');
         
         $departmentId = new Zend_Form_Element_Select('department_id');
         $departmentModel = new Application_Model_DbTable_Department();

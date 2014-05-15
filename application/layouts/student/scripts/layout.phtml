@@ -80,7 +80,7 @@
 			
 			<div id="content" class="span10">
 			<!-- content starts -->
-			
+        <?php echo $this->partial('_partial/displayMessages.phtml', 'default', array('messages' => $this->messages));?>
         <?php echo $this->layout()->content.PHP_EOL; ?>		
 			
 				
@@ -111,8 +111,8 @@
 		</div>
 
 		<footer>
-			<p class="pull-left">&copy; <a href="http://usman.it" target="_blank">Muhammad Usman</a> 2012</p>
-			<p class="pull-right">Powered by: <a href="http://usman.it/free-responsive-admin-template">Charisma</a></p>
+			<p class="pull-left"><a href="" target="_blank">Ruziye DAĞCI - Hurşit TOPAL - Alaattin USTA</a> </p>
+			<p class="pull-right"><a href="">&copy;  2012</a></p>
 		</footer>
 		
 	</div><!--/.fluid-container-->

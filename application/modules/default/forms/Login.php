@@ -12,13 +12,13 @@ class Default_Form_Login extends Zend_Form
         $email->setAttrib('placeHolder', $this->translate->translate('email'))
                 ->setLabel($this->translate->translate('Your Email Adress'))
                 ->setRequired(TRUE)
-                ->setAttrib('class', 'input-prepend');
+                ->setAttrib('class', ' controls span6 typeaead');
         
         $password = new Zend_Form_Element_Password('password');
         $password->setAttrib('placeHolder',$this->translate->translate('password'))
                 ->setRequired(true)
                 ->setLabel($this->translate->translate('Your Password'))
-                ->setAttrib('class', 'input-prepend');
+                ->setAttrib('class', ' controls span6 typeaead');
         $submit = new Zend_Form_Element_Submit('submit');                
         $submit->setLabel($this->translate->translate('Enter'))
                 ->setAttrib('class', 'btn btn-primary');

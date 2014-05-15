@@ -109,6 +109,16 @@ class Application_Model_DbTable_Members extends Zend_Db_Table_Abstract
         );
         $this->update($data,$this->_primary.' = '.(int)$id);
     }
+    public function userConfirmationStatus($email,$password){
+        $user = $this->getByFilter(array('email' => $email,
+                                         'password' => $password));
+        if($user->confirmation == "true"){
+            return TRUE;
+        }
+         else {
+            return FALSE;
+        }
+    }
     public function corfirmed($id){
         $data = array(
             'confirmation' => 'true'
