@@ -64,7 +64,7 @@ class Admin_IndexController extends Zend_Controller_Action
         $dbUsername = $config->resources->db->params->username;
         $dbPassword = $config->resources->db->params->password;
         $dbName = $config->resources->db->params->dbname;
-        $file = 'backup/' . $now . '.sql';
+        $file = '../backup/' . $now . '.sql';
         $command = sprintf("
             mysqldump -u %s --password=%s -d %s --skip-no-data > %s",
             escapeshellcmd($dbUsername),

@@ -141,6 +141,7 @@ class Application_Model_DbTable_LessonStudent extends Zend_Db_Table_Abstract
                 ->join('lesson AS l', 'ls.lesson_id=l.id',array('l.name as lesson_name'))
                 ->join('department AS d', 'l.department_id=d.id',array('d.name as department_name'))
                 ->join('class AS c', 'l.class_id=c.id',array('c.name as class_name'));
+        echo $filter;
         return $this->fetchAll($filter);
     }
 }

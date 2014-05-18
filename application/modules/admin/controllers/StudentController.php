@@ -77,7 +77,6 @@ class Admin_StudentController extends Zend_Controller_Action
     public function departmentClassPdfListAction()
     {
         require_once APPLICATION_PATH.'/../library/Mylibrary/mpdf/mpdf.php';
-        
         $lesson_id = $this->_getParam('id');
         
         $lessonModel = new Application_Model_DbTable_Lesson();

@@ -286,9 +286,9 @@ class Teacher_ExamsController extends Zend_Controller_Action
         
         $exam = $this->_examModel->getExam($exam_id);
         $questions = $questionModel->getAll(array('exam_id' => $exam_id));
-       
         //pdf writer kütüphanemiz
-        require_once APPLICATION_PATH.'/../library/Mylibrary/mpdf/mpdf.php';
+        
+        require_once APPLICATION_PATH . '/../library/Mylibrary/mpdf/mpdf.php';
         $pdfWriter = new mPDF();
         $page = $this->view->partial('exams/pdf-download.phtml', 'teacher', array('exam' => $exam, 'questions' => $questions));
         $pdfWriter->WriteHTML($page);

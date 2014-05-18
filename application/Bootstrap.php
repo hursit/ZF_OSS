@@ -3,6 +3,9 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected $member_type = 'default';
+    public function _initDatetime(){
+        date_default_timezone_set("Europe/Istanbul");
+    }
     public function _initPlugins(){
         $this->bootstrap('frontController');
         $frontController = $this->getResource('frontController');
@@ -244,6 +247,31 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         );
         $cache = Zend_Cache::factory('Page', 'File', $frontendOptions, $backendOptions);
         $cache->start();
-    } */ 
+    }  
+    public function _initCache(){
+            $frontendOptions = array(
+                    'lifetime' => '604800000',
+                    'content_type_memorization' => false,
+                    'default_options' => array(
+                        'cache' => true,
+                        'make_id_with_cookie_variables' => false,
+                        'make_id_with_session_variables' => false,
+                        'cache_with_get_variables' => true,
+                        'cache_with_post_variables' => true,
+                        'cache_with_session_variables' => true,
+                        'cache_with_files_variables' => true,
+                        'cache_with_cookie_variables' => true,
+                    ),
+                    'regexps' => array(
+                        '$' => array('cache' => true),
+                    )
+                );
+
+                $backendOptions = array('cache_dir' => APPLICATION_PATH ."/../servercache/");
+                $cache = Zend_Cache::factory('Page', 'File', $frontendOptions, $backendOptions);
+                $cache->start();
+
+                
+    }*/
 }
 
