@@ -42,11 +42,6 @@ class Teacher_ExamsController extends Zend_Controller_Action
             try {
                 unset($formData['submit']);
                 $exam_id = $this->_examModel->add($formData);
-                $fileModel = new Application_Model_File();
-                    
-                //exams folder
-                $fileModel->createFolder("lessonExamsHomeworks/".$lesson_id."/exams", $exam_id);
-
                 $this->_helper->flashMessenger("Sınav başarıyla eklendi");
                 $this->_helper->redirector->gotoRoute(array(
                                     'action' => 'lesson-exams',

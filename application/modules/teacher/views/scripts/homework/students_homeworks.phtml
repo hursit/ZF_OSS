@@ -1,0 +1,32 @@
+<html>
+    <head>
+        
+    </head>
+    <style>
+        body { 
+            background: url('/img/pdf_background.jpg');
+            background-repeat:no-repeat;
+            background-attachment:fixed;
+            background-position:center; 
+        }
+    </style>
+    <body>
+         <fieldset>
+            Son Tarih : <?php echo $this->homework->hw_finish_time; ?> <br>
+            <h3 style="text-align: center">
+                <?php echo $this->homework->department_name; ?><br>
+                <?php echo $this->homework->class_name; ?><br>
+                <?php echo $this->homework->lesson_name; ?> Dersi <br>
+                Öğr. Görevlisi : <?php echo $this->homework->teacher_name." ". $this->homework->teacher_surname; ?>  <br>
+                Öğrenci : <?php echo $this->student_homework->student_name." ". $this->student_homework->student_surname; ?><br>  
+                Öğrenci No: <?php echo $this->student_homework->student_number ?><hr>
+                <?php echo $this->homework->hw_title; ?>
+            </h3>
+            <div>
+                <?php echo $this->homework->hw_detail;?>
+            </div>
+        </fieldset>
+    <hr /> <center><h4>Öğrenci Cevabı</h4></center> <hr />
+    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->student_homework->student_homework ?>
+    </body>
+</html>

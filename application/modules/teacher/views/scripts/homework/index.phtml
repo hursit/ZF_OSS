@@ -31,7 +31,8 @@
                               </thead>   
                               <tbody>
                                   <?php if(count($this->homeworks)){
-                                    foreach ($this->homeworks as $homework) {
+                                      $datetimemodel = new Application_Model_Datetime();
+                                      foreach ($this->homeworks as $homework) {
                                   ?>
                                     <tr>
                                         <td class="center"><?php echo $homework->department_name?></td>
@@ -51,7 +52,7 @@
                                                             <i class="icon-trash icon-white"></i> 
                                                             Sil
                                                     </a>
-                                                    <a class="btn btn-danger" href="<?php echo $this->baseUrl('/teacher/homework/pdf-download/'.$homework->hw_id);?>">
+                                                    <a title="Ödevi pdf olarak indir" class="btn btn-danger" href="<?php echo $this->baseUrl('/teacher/homework/pdf-download/'.$homework->hw_id);?>">
                                                             <i class="icon-trash icon-white"></i> 
                                                             Pdf Olarak İndir
                                                     </a>

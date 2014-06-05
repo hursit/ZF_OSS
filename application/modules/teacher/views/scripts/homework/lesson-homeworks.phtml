@@ -30,6 +30,7 @@
                               </thead>   
                               <tbody>
                                   <?php if(count($this->homeworks)){
+                                      $datetimemodel = new Application_Model_Datetime();
                                       foreach ($this->homeworks as $homework) {
                                    ?>
                                     <tr>
@@ -51,6 +52,14 @@
                                                             <i class="icon-zoom-in icon-white"></i>  
                                                             Pdf Olarak İndir                                           
                                                     </a>
+                                                <?php if(!$datetimemodel->is_accessible($homework->finish_time)){ ?>
+                                                    
+                                                    <a title="Ödevleri toplu halde zip olarak indir" class="btn btn-danger" href="<?php echo $this->baseUrl('/teacher/homework/homeworks-download/'.$homework->id);?>">
+                                                            <i class="icon-trash icon-white"></i> 
+                                                            Sonuçları İndir
+                                                    </a>
+                                                <?php } ?>
+                     
                                             </td>
                                     </tr>
                                   <?php  }};?>

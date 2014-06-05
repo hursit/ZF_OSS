@@ -60,12 +60,12 @@ class Application_Model_DbTable_Exam extends Zend_Db_Table_Abstract
     }
     public function futureExams($teacher_id){
         $now = (string)date("Y/m/d H:i:s");
-    
         $teacherLessons = $this->select()->setIntegrityCheck(false)->from('lesson', array('id'))->where('teacher_id = '.$teacher_id);
         $filter = $this->select();
         $filter->setIntegrityCheck(false);
         $filter->from($this->_name . ' AS e',array('e.id as exam_id','e.title as exam_title','e.start_time as exam_start_time','e.finish_time as exam_finish_time','e.type as exam_type'))
                 ->where('e.lesson_id in ?',$teacherLessons)
+                ->where('e.start_time > ?',$now)
                 ->join('lesson AS l', 'e.lesson_id=l.id',array('l.name as lesson_name'))
                 ->join('department AS d', 'l.department_id=d.id',array('d.name as department_name'))
                 ->join('class AS c', 'l.class_id=c.id',array('c.name as class_name'));

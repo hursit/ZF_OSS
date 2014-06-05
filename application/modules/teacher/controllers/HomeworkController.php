@@ -22,7 +22,6 @@ class Teacher_HomeworkController extends Zend_Controller_Action
     {
         $this->view->homeworks = $this->_homeworkModel->getTeacherHomeworks($this->_user->id);
     }
-
     public function lessonHomeworksAction()
     {
         $lesson_id = $this->_getParam('id');
@@ -42,10 +41,6 @@ class Teacher_HomeworkController extends Zend_Controller_Action
             try {
                 unset($formData['submit']);
                 $homework_id = $this->_homeworkModel->add($formData);
-                $fileModel = new Application_Model_File();
-
-                //homeworks folder
-                $fileModel->createFolder("lessonExamsHomeworks/".$lesson_id."/homeworks", $homework_id);
                 $this->_helper->flashMessenger("Ödev başarıyla eklendi");
                 $this->_helper->redirector->gotoRoute(array(
                                             'action' => 'lesson-homeworks',
@@ -95,9 +90,9 @@ class Teacher_HomeworkController extends Zend_Controller_Action
 
     public function pdfDownloadAction()
     {
+        
         $this->_helper->layout->disableLayout();
         $homework_id = $this->_getParam('id');
-        $questionModel = new Application_Model_DbTable_Questions();
         
         $homework = $this->_homeworkModel->getHomework($homework_id);
        
@@ -108,6 +103,27 @@ class Teacher_HomeworkController extends Zend_Controller_Action
         $pdfWriter->WriteHTML($page);
         $pdfWriter->Output(substr($homework->hw_title,0,20)."_ödev.pdf","D"); 
         exit;
+    }
+    
+    public function homeworksDownloadAction()
+    {
+        require_once APPLICATION_PATH.'/../library/Mylibrary/mpdf/mpdf.php';
+        
+        $homework_id = $this->_getParam('id');
+        $fileModel = new Application_Model_File();
+        $fileModel->createFolder("/homeworks/".$homework_id);
+        $this->_helper->layout->disableLayout();
+        $studentHomeworksModel = new Application_Model_DbTable_StudentHomeworks();
+        $homework = $this->_homeworkModel->getHomework($homework_id);
+        $homeworks = $studentHomeworksModel->getHomeworksForDownload($homework_id);
+        foreach($homeworks as $student_homework){
+            $pdfWriter = new mPDF();
+            $page = $this->view->partial('homework/students_homeworks.phtml', 'teacher', array('student_homework' => $student_homework,'homework' => $homework));
+            $pdfWriter->WriteHTML($page);
+            $pdfWriter->Output(APPLICATION_PATH. "/../public/zip_files/homeworks/".$homework_id."/".$student_homework->student_id.".pdf","F");
+        }
+        $fileModel->compressFolder("/homeworks/".$homework_id);
+        $this->_redirect("/zip_files");
     }
 
 

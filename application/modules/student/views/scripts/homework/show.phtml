@@ -34,8 +34,9 @@
             </div><!--/span-->
 
 </div><!--/row-->
+
 <?php 
-    if($this->homework_status){                         
+    if($this->homework_status && !$this->status){                         
 ?>
 <div class="row-fluid sortable">
             <div class="box span12">
@@ -57,3 +58,19 @@
 
 </div><!--/row-->
 <?php } ?>
+
+<?php 
+if($this->status){ 
+?>        
+<div class="alert alert-success">Ödevi Gönderdiniz</div>
+<?php } ?>                         
+
+    
+    
+    
+<?php 
+if(!$this->homework_status){      
+?>
+<div class="alert alert-danger">Ödevin Zamanı Geçti</div>
+<?php } 
+
