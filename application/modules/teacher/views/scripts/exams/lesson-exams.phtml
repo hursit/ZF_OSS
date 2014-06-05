@@ -31,7 +31,8 @@
                               </thead>   
                               <tbody>
                                   <?php if(count($this->exams)){
-                                    foreach ($this->exams as $exam) {
+                                      $datetimeModel = new Application_Model_Datetime();
+                                      foreach ($this->exams as $exam) {
                                   ?>
 
 
@@ -60,10 +61,18 @@
                                                             <i class="icon-trash icon-white"></i> 
                                                             Pdf İndir
                                                     </a>
-                                                         <a class="btn btn-primary" href="<?php echo $this->baseUrl('/teacher/exams/questions/'.$exam->id);?>">
+                                                    <a class="btn btn-primary" href="<?php echo $this->baseUrl('/teacher/exams/questions/'.$exam->id);?>">
                                                             <i class="icon-zoom-in icon-white"></i>  
                                                             Sorular                                            
-                                                         </a>    
+                                                    </a>  
+
+                                                    <?php if(!$datetimeModel->is_accessible($exam->finish_time)){ ?>
+                                                    <a class="btn btn-danger" title="Tüm öğrencilerin sınavlarını zip olarak indir" href="<?php echo $this->baseUrl('/teacher/exams/exams-download/'.$exam->id);?>">
+                                                            <i class="icon-zoom-in icon-white"></i>  
+                                                            Sonuçları İndir                                            
+                                                    </a>  
+                                                        
+                                                    <?php } ?>
                                             </td>
                                     </tr>
                                   <?php  }};?>

@@ -290,4 +290,35 @@ class Teacher_ExamsController extends Zend_Controller_Action
         $pdfWriter->Output(substr($exam->exam_title,0,50)."_sinavi_sorulari.pdf","D"); 
         exit;
     }
+    public function examsDownloadAction()
+    {
+        //pdf writer kütüphanemiz
+        require_once APPLICATION_PATH . '/../library/Mylibrary/mpdf/mpdf.php';
+        
+        $this->_helper->layout->disableLayout();
+        $exam_id = $this->_getParam('id');
+        $fileModel = new Application_Model_File();
+        $fileModel->createFolder("/exams/".$exam_id);
+        $questionModel = new Application_Model_DbTable_Questions();
+        $studentExamModel = new Application_Model_DbTable_StudentExam();
+        $students = $studentExamModel->getAll(array('exam_id' => $exam_id));
+        $exam = $this->_examModel->getExam($exam_id);
+        $questions = $questionModel->getAll(array('exam_id' => $exam_id));
+        if(!count($students)){
+                $this->_helper->flashMessenger("Ödev Gönderen Öğrenci Bulunamadı");
+                $this->redirect($this->getRequest()->getServer('HTTP_REFERER'));
+        }
+        $membersModel = new Application_Model_DbTable_Members();
+        foreach ($students as $student) {
+            $student_detail = $membersModel->getByFilter(array('id' => $student->student_id));
+            $pdfWriter = new mPDF();
+            $page = $this->view->partial('exams/students_exams.phtml', 'teacher', array('exam' => $exam,'student' => $student_detail, 'questions' => $questions));
+            $pdfWriter->WriteHTML($page);
+            $pdfWriter->Output(APPLICATION_PATH. "/../public/zip_files/exams/".$exam_id."/".$student->student_id.".pdf","F");
+        
+        }
+        $fileModel->compressFolder("exams/",$exam_id);
+        $this->_redirect("/zip_files/exams/".$exam_id.".zip");
+    
+    }
 }

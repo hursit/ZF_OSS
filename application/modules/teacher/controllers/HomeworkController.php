@@ -116,14 +116,18 @@ class Teacher_HomeworkController extends Zend_Controller_Action
         $studentHomeworksModel = new Application_Model_DbTable_StudentHomeworks();
         $homework = $this->_homeworkModel->getHomework($homework_id);
         $homeworks = $studentHomeworksModel->getHomeworksForDownload($homework_id);
+        if(!count($homeworks)){
+                $this->_helper->flashMessenger("Ödev Gönderen Öğrenci Bulunamadı");
+                $this->redirect($this->getRequest()->getServer('HTTP_REFERER'));
+        }
         foreach($homeworks as $student_homework){
             $pdfWriter = new mPDF();
             $page = $this->view->partial('homework/students_homeworks.phtml', 'teacher', array('student_homework' => $student_homework,'homework' => $homework));
             $pdfWriter->WriteHTML($page);
             $pdfWriter->Output(APPLICATION_PATH. "/../public/zip_files/homeworks/".$homework_id."/".$student_homework->student_id.".pdf","F");
         }
-        $fileModel->compressFolder("/homeworks/".$homework_id);
-        $this->_redirect("/zip_files");
+        $fileModel->compressFolder("homeworks/",$homework_id);
+        $this->_redirect("/zip_files/homeworks/".$homework_id.".zip");
     }
 
 

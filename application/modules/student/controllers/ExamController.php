@@ -87,7 +87,7 @@ class Student_ExamController extends Zend_Controller_Action
                 $array_question = split("-", $question);
                 if($array_question[1] == "written"){
                     $data = array (
-                        'user_id' => $this->_user->id,
+                        'student_id' => $this->_user->id,
                         'question_id' => $array_question[0],
                         'answer' => $answer
                     );
@@ -95,7 +95,7 @@ class Student_ExamController extends Zend_Controller_Action
                 }
                 elseif ($array_question[1] == "choice"){
                     $data = array (
-                        'user_id' => $this->_user->id,
+                        'student_id' => $this->_user->id,
                         'question_id' => $array_question[0],
                         'choice_id' => $answer
                     );

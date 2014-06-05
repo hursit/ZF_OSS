@@ -27,8 +27,26 @@ class Application_Model_DbTable_WrittenAnswers extends Zend_Db_Table_Abstract
             return $this->fetchAll($filter);
         }
     }
-    
-
-
+    public function getByFilter($filterArr = array(),$toArray=false)
+    {
+        $filter = $this->select();
+        if (is_array($filterArr)) {
+            foreach ($filterArr as $fieldId => $fieldValue) {
+                $filter->where($fieldId . '=?', $fieldValue);
+            }
+        }
+        $row = $this->fetchRow($filter);
+        if (!$row) {
+            return array();
+        }
+        else{
+            if($toArray){
+                return $row->toArray();
+            }
+            else{
+                return $row;
+            }
+        }
+    }
 }
 

@@ -22,10 +22,10 @@
                             <table class="table table-striped table-bordered bootstrap-datatable datatable">
                               <thead>
                                       <tr>
+                                              <th>Bitiş Zamanı</th>
                                               <th>Bölüm</th>
                                               <th>Ders</th>
                                               <th>Başlık</th>
-                                              <th>Bitiş Zamanı</th>
                                               <th></th>
                                       </tr>
                               </thead>   
@@ -35,10 +35,10 @@
                                       foreach ($this->homeworks as $homework) {
                                   ?>
                                     <tr>
+                                        <td class="center"><?php echo $homework->hw_finish_time?></td>
                                         <td class="center"><?php echo $homework->department_name?></td>
                                         <td class="center"><?php echo $homework->lesson_name; ?></td>
                                             <td class="center"><?php echo substr($homework->hw_title, 0, 60)?></td>
-                                            <td class="center"><?php echo $homework->hw_finish_time?></td>
                                             <td class="center">
                                                     <a class="btn btn-success" href="<?php echo $this->baseUrl('/teacher/homework/show/'.$homework->hw_id);?>">
                                                             <i class="icon-zoom-in icon-white"></i>  
@@ -48,15 +48,19 @@
                                                             <i class="icon-edit icon-white"></i>  
                                                             Düzenle                                            
                                                     </a>
-                                                    <a class="btn btn-danger" href="#">
-                                                            <i class="icon-trash icon-white"></i> 
-                                                            Sil
-                                                    </a>
                                                     <a title="Ödevi pdf olarak indir" class="btn btn-danger" href="<?php echo $this->baseUrl('/teacher/homework/pdf-download/'.$homework->hw_id);?>">
                                                             <i class="icon-trash icon-white"></i> 
                                                             Pdf Olarak İndir
                                                     </a>
-                                            </td>
+                                                <?php if(!$datetimemodel->is_accessible($homework->hw_finish_time)){ ?>
+                                                    
+                                                    <a title="Ödevleri toplu halde zip olarak indir" class="btn btn-danger" href="<?php echo $this->baseUrl('/teacher/homework/homeworks-download/'.$homework->hw_id);?>">
+                                                            <i class="icon-trash icon-white"></i> 
+                                                            Sonuçları İndir
+                                                    </a>
+                                                <?php } ?>
+                     
+                                 </td>
                                     </tr>
                                   <?php  }};?>
                               </tbody>

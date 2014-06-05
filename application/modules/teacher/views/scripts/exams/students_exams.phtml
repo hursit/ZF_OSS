@@ -1,0 +1,70 @@
+<html>
+    <head>
+        
+    </head>
+    <style>
+        body { 
+            background: url('/img/pdf_background.jpg');
+            background-repeat:no-repeat;
+            background-attachment:fixed;
+            background-position:center; 
+        }
+    </style>
+    <body>
+    
+         <fieldset>
+                                  Başlangıç-Bitiş Tarihi : <?php echo $this->exam->exam_start_time." - ".$this->exam->exam_finish_time; ?> <br>
+                                  <h3 style="text-align: center">
+                                      <?php echo $this->exam->department_name; ?><br>
+                                      <?php echo $this->exam->class_name; ?><br>
+                                      <?php echo $this->exam->lesson_name; ?> Dersi <br>
+                                      Öğr. Görevlisi : <?php echo $this->exam->teacher_name." ". $this->exam->teacher_surname; ?>
+                                      <?php echo $this->exam->exam_title; ?><br>
+                                     Öğrenci : <?php echo $this->student->name." ". $this->student->surname; ?>  
+                                      <?php echo $this->exam->exam_title; ?><br>
+                                     Öğrenci No : <?php echo $this->student->studentNumber; ?>  <hr />
+                                  </h3>
+                                  <div>
+                                      <?php echo $this->exam->exam_detail;?>
+                                  </div>
+                              </fieldset>
+    <br><br>
+<center><h2>Sorular</h2></center>
+
+            <?php if(count($this->questions)){
+                $i = 1;
+                $choicesModel = new Application_Model_DbTable_Choices();
+                $choiceAnswersModel = new Application_Model_DbTable_ChoiceAnswers();
+                $writtenAnswersModel = new Application_Model_DbTable_WrittenAnswers();
+                foreach ($this->questions as $question) { ?>
+                   <div style="font-weight:bold;font-size:14px;color:brown"><?php echo $i."-) ".$question->question; ?></div><br>
+                        <?php if($question->type = "multiple choice"){
+                            echo "<ul style='list-style-type:lower-alpha'>";
+                            foreach ($choicesModel->getAll(array("question_id" => $question->id)) as $choice) {
+                                echo "<li style='font-weight:bold;font-size:14'>".$choice->choice."</li><br>";
+                            } 
+                            echo "</ul>";
+                        }?>
+             <?php
+             
+                $answer = "";
+                if($question->type = "multiple choice"){
+                    $choice_id = $choiceAnswersModel->getByFilter(array('student_id' => $this->student->id,'question_id' => $question->id))->choice_id;
+                    if(count($choice_id)){
+                        $answer = $choicesModel->getByFilter(array('id' => $choice_id))->choice;
+                    }
+                }
+                if($question->type = "written"){
+                    
+                    $written = $writtenAnswersModel->getByFilter(array('student_id' => $this->student->id,'question_id' => $question->id));
+                    if(count($written)){
+                        $answer = $written->answer;
+                    }
+                }
+                echo "<p><span style='font-weight:bold'>Öğrencinin Cevabı: </span>".$answer."</p>";
+                $i+=1; 
+                }
+            }; 
+            ?>
+    </body>
+</html>

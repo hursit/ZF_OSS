@@ -34,15 +34,14 @@ class Application_Model_File
         } 
         return rmdir($dir); 
     } 
-    public function compressFolder($folderName){
-       $path = APPLICATION_PATH."/../public/zip_files".$folderName;
-       $zipPath = APPLICATION_PATH."/../public/zip_files/zipArchive.zip";
+    public function compressFolder($type,$id){
+       $path = APPLICATION_PATH."/../public/zip_files/".$type."/".$id;
+       $zipPath = APPLICATION_PATH."/../public/zip_files/".$type."/".$id.".zip";
        if(file_exists($zipPath)){
            unlink($zipPath);
        }
-       $zipName = "zipArchive.zip";
        $zip = new ZipArchive();
-       $zip->open($zipName,  ZipArchive::CREATE);
+       $zip->open($zipPath,  ZipArchive::CREATE);
        
        //Dosyaları tarayarak arşive atıyoruz.
        foreach (scandir($path) as $file) {
