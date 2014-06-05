@@ -8,6 +8,11 @@ class Application_Model_DbTable_Department extends Zend_Db_Table_Abstract
     public function getAllAsPairs(){
         return $this->_db->fetchPairs($this->_db->select()->from($this->_name, array('id', 'name')));
     }
+    
+    //Yeni kayitlar icin
+    public function getAllAsPairsForSignUp(){
+        return $this->_db->fetchPairs($this->_db->select()->from($this->_name, array('id', 'name'))->where('is_deleted= ?','false'));
+    }
     public function getAll($filterArr=array(),$toArray = false)
     {
         $filter = $this->select();

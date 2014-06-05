@@ -104,6 +104,30 @@ class Application_Model_DbTable_Lesson extends Zend_Db_Table_Abstract
         return $this->fetchAll($filter);
     }
     
+    //Bölüm derslerini görüntülerken hocalar ile birlikte(Hocalar atandıysa)
+    public function getDepartmentLessonsWithTeacherForRegistration($department_id){
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS l', array('l.id as les_id','l.name as les_name','l.is_deleted as les_is_deleted'))
+                ->where('l.department_id = ?', $department_id)
+                ->where('l.is_deleted = ?', 'false')
+                ->where('l.teacher_id != ?', 0)
+                ->join('members AS m', 'l.teacher_id=m.id', array('m.name as teac_name', 'm.surname as teac_surname'))
+                ->join('class AS c','l.class_id=c.id',array('c.name as class_name'));
+        return $this->fetchAll($filter);
+    }
+    //Bölüm derslerini görüntülerken hocalar olmadan(Hocalar atanmadıysa)
+    public function getDepartmentLessonsWithNoTeacherForRegistration($department_id){
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS l', array('l.id as les_id','l.name as les_name','l.is_deleted as les_is_deleted'))
+                ->where('l.department_id = ?', $department_id)
+                ->where('l.is_deleted = ?', 'false')
+                ->where('l.teacher_id = ?', 0)
+                ->join('class AS c','l.class_id=c.id',array('c.name as class_name'));
+        return $this->fetchAll($filter);
+    }
+    
     public function getTeacherLessons($teacher_id){
         $filter = $this->select();
         $filter->setIntegrityCheck(false);

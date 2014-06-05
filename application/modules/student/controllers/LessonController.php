@@ -27,8 +27,8 @@ class Student_LessonController extends Zend_Controller_Action
     public function departmentLessonsAction()
     {
         
-        $this->view->lessonsWithTeacher = $this->_lessonModel->getDepartmentLessonsWithTeacher($this->_user->department_id);
-        $this->view->lessonsWithNoTeacher = $this->_lessonModel->getDepartmentLessonsWithNoTeacher($this->_user->department_id);
+        $this->view->lessonsWithTeacher = $this->_lessonModel->getDepartmentLessonsWithTeacherForRegistration($this->_user->department_id);
+        $this->view->lessonsWithNoTeacher = $this->_lessonModel->getDepartmentLessonsWithNoTeacherForRegistration($this->_user->department_id);
     }
 
     public function addLessonApplicationAction()

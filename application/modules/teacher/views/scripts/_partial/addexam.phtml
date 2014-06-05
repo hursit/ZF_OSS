@@ -8,7 +8,7 @@
     <input type="hidden" name="teacher_id" value="<?php echo $this->user->id ?>">
     <input type="hidden" name="lesson_id" value="<?php echo $this->lesson->id ?>">
     <input type="hidden" name="department_id" value="<?php echo $this->lesson->department_id ;?>">
-    <input type="hidden" name="class_id" value="<?php echo $this->lesson->class_id ?>">
+    <input type="hidden" name="class_id" value="<?php echo $this->lesson->class_id ?> /">
     <fieldset>
         <label for="title">Başlık</label>
         <input type="text" name="title" id="title" placeHolder="Başlığı giriniz" required />
@@ -48,11 +48,18 @@
     <input type="submit" class="btn btn-primary" value="kaydet" />
 </form>
 
+
 <script type="text/javascript"
      src="/datetimepicker/jquery.min.js">
 </script> 
 <script type="text/javascript"
+ src="/datetimepicker/bootstrap.min.js">
+</script>
+<script type="text/javascript"
  src="/datetimepicker/bootstrap-datetimepicker.min.js">
+</script>
+<script type="text/javascript"
+ src="/datetimepicker/bootstrap-datetimepicker.tr.js">
 </script>
 <script type="text/javascript">
   $('.datetimepicker').datetimepicker({

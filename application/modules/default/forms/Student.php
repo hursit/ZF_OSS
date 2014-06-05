@@ -56,7 +56,7 @@ class Default_Form_Student extends Zend_Form
                 ->setAttrib('class', 'input-block-level')
                 ->addValidator($empty_validate)
                 ->setAttrib('class', 'input-block-level')
-                ->addMultiOptions($departmentModel->getAllAsPairs());
+                ->addMultiOptions($departmentModel->getAllAsPairsForSignUp());
      
         
         $classModel = new Application_Model_DbTable_Class();

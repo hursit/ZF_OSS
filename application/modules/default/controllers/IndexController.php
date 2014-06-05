@@ -1,5 +1,4 @@
 <?php
-
 class Default_IndexController extends Zend_Controller_Action
 {
 
@@ -33,15 +32,14 @@ class Default_IndexController extends Zend_Controller_Action
             if($form->isValid($formData)){
                 $email = $form->getValue('email');
                 $password = $form->getValue('password');
-                
                 $authAdapter = $this->getStudentAuthAdapter();
                 $authAdapter->setIdentity($email)
-                        ->setCredential($password);
+                        ->setCredential(sha1(md5($password)));
                 $auth = Zend_Auth::getInstance();
                 $result = $auth->authenticate($authAdapter);
                 if($result->isValid()){
                     $membersModel = new Application_Model_DbTable_Members();
-                    if(!$membersModel->userConfirmationStatus($email, $password)){
+                    if(!$membersModel->userConfirmationStatus($email, sha1(md5($password)))){
                         Zend_Auth::getInstance()->clearIdentity();
                         $this->_helper->flashMessenger("Üyeliğiniz henüz onaylanmadı");
                         $this->_redirector->gotoSimple('login',
@@ -53,6 +51,10 @@ class Default_IndexController extends Zend_Controller_Action
                     $storage->write($authAdapter->getResultRowObject(
                             null,'password'));
                     
+
+                    $employeeSession = new Zend_Session_Namespace('Zend_Auth');
+                    // 6 saat sessionları tutuyoruz
+                    $employeeSession->setExpirationSeconds(60*60*6);
                     $identity = $auth->getIdentity();
                     if($identity->role == 'student'){
                         $this->_redirect('/student');
@@ -98,6 +100,7 @@ class Default_IndexController extends Zend_Controller_Action
             {
                 if($formData['password'] ==  $formData['retlyPassword']){
                     unset($formData['retlyPassword']);
+                    $formData['password'] = sha1(md5($formData['password']));
                     unset($formData['submit']);
                     $memberModel->add($formData);    
                     $this->_redirector->gotoSimple('sign-up-success',
@@ -124,6 +127,7 @@ class Default_IndexController extends Zend_Controller_Action
                 if($formData['password'] ==  $formData['retlyPassword']){
                     unset($formData['retlyPassword']);
                     unset($formData['submit']);
+                    $formData['password'] = sha1(md5($formData['password']));
                     $memberModel = new Application_Model_DbTable_Members();
                     $memberModel->add($formData);    
                     $this->_redirector->gotoSimple('sign-up-success',

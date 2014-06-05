@@ -59,7 +59,7 @@ class Application_Model_DbTable_Members extends Zend_Db_Table_Abstract
     }
     public function getDepartmentNoAdvisorTeachersAsPairs($department_id){
         $select = $this->_db->select();
-        $select->from($this->_name, array('id', 'name'));
+        $select->from($this->_name, array('id', "CONCAT_WS(' ',name, surname)"));
         $select->where('department_id = ?', $department_id);
         $select->where('role = ?', 'teacher');
         $select->where('is_advisor = ?', 'false');
@@ -158,6 +158,19 @@ class Application_Model_DbTable_Members extends Zend_Db_Table_Abstract
                 ->join('class AS c', 'm.class_id=c.id',array('c.name as class_name'));
         return $this->fetchAll($filter);
         
+    }
+    public function getClassStudents($lesson_id,$department_id){
+        $filter = $this->select();
+        $filter->setIntegrityCheck(false);
+        $filter->from($this->_name . ' AS m',array('m.studentNumber as student_number',
+                                                    'm.name as student_name',
+                                                    'm.surname as student_surname'))
+                ->where('m.class_id = ?', $lesson_id)
+                ->where('m.role = ?', 'student')
+                ->where('m.department_id = ?', $department_id)
+                ->where('m.confirmation = ?', "true");
+        echo $filter."<br><br>";
+        return $this->fetchAll($filter);
     }
     
 }

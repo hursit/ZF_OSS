@@ -27,20 +27,16 @@
                                       </tr>
                               </thead>   
                               <tbody>
-                                  <?php if(count($this->homeworks)){
-                                      $memberModel = new Application_Model_DbTable_Members();
-                                      $lessonModel = new Application_Model_DbTable_Lesson();
-                                      foreach ($this->homeworks as $homework) {
-                                            $teacher = $memberModel->getByFilter(array('id' => $homework->teacher_id));
-                                       ?>
-                                    
+                                    <?php if(count($this->homeworks)){
+                                              foreach ($this->homeworks as $homework) {
+                                    ?>
                                     <tr>
-                                        <td><?php echo $lessonModel->getByFilter(array('id' => $homework->lesson_id))->name; ?></td>
-                                            <td><?php echo $homework->title ;?></td>
-                                            <td class="center"><?php echo $memberModel->getByFilter(array('id' => $homework->teacher_id))->name;  ?></td>
-                                            <td><?php echo $homework->finish_time ;?></td>
+                                        <td><?php echo $homework->lesson_name; ?></td>
+                                            <td><?php echo $homework->hw_title ;?></td>
+                                            <td class="center"><?php echo $homework->teacher_name." ".$homework->teacher_surname  ?></td>
+                                            <td><?php echo $homework->hw_finish_time ;?></td>
                                             <td class="center">
-                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/student/homework/show/'.$homework->id);?>">
+                                                    <a class="btn btn-success" href="<?php echo $this->baseUrl('/student/homework/show/'.$homework->hw_id);?>">
                                                             <i class="icon-zoom-in icon-white"></i>  
                                                             Görüntüle                                            
                                                     </a>

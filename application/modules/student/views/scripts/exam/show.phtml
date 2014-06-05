@@ -40,8 +40,8 @@ $(document).ready(function() {
                     </div>
                 <div class="box-content">
                               <fieldset>
-                                  Baslık : <?php echo $this->exam->title; ?> <br>
-                                  Detay : <?php echo $this->exam->detail; ?> <br>
+                                  <legend><?php echo $this->exam->title; ?> </legend>
+                                  <p class="box">&nbsp;&nbsp;&nbsp;<?php echo $this->exam->detail; ?> <br></p>
                                   Başlangıc : <?php echo $this->exam->start_time; ?> <br>
                                   Bitiş : <?php echo $this->exam->finish_time; ?> <br>
                                   Girecek Öğrenciler : /// Doldurulacak<br>

@@ -80,11 +80,15 @@ class Admin_LessonController extends Zend_Controller_Action
     {
         $lesson_id = $this->_getParam('id');
         $this->_lessonModel->unPublish($lesson_id);
+        $this->_helper->flashMessenger("Ders yeni kayıtlanmalara kapatıldı.");
+        $this->redirect("/admin/department/show/".$this->_lessonModel->getByFilter(array('id' => $lesson_id))->department_id);
     }
     public function publishAction()
     {
         $lesson_id = $this->_getParam('id');
         $this->_lessonModel->Publish($lesson_id);
+        $this->_helper->flashMessenger("Ders yeni kayıtlanmalara açıldı.");
+        $this->redirect("/admin/department/show/".$this->_lessonModel->getByFilter(array('id' => $lesson_id))->department_id);
     }
     public function lessonStudentsAction()
     {
